@@ -23,6 +23,9 @@ function BarbieApp() {
   );
 }
 
+// Note: onAccessGranted receives (address: string, walletId: WalletId) but
+// BarbieApp only needs to know access was granted — unused params are fine.
+
 function Router() {
   return (
     <Switch>
