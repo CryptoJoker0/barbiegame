@@ -6,6 +6,9 @@
  * OpenAPI spec version: 0.2.0
  */
 
-export interface HealthStatus {
-  status: string;
+export interface NftVerification {
+  address: string;
+  hasNft: boolean;
+  balance: number;
+  verified: boolean;
 }

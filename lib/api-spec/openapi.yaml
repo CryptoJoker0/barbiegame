@@ -2,21 +2,35 @@ openapi: 3.1.0
 info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
-  version: 0.1.0
-  description: API specification
+  version: 0.2.0
+  description: BARBIEFUN-GAME API specification
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: player
+    description: Player profile and progress
+  - name: game
+    description: Game mechanics
+  - name: leaderboard
+    description: Leaderboard rankings
+  - name: achievements
+    description: Player achievements
+  - name: announcements
+    description: Game announcements
+  - name: admin
+    description: Admin operations
+  - name: nft
+    description: NFT verification
+
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,13 +38,739 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  # ─── Player ───────────────────────────────────────────────────────────────
+  /players/{address}:
+    get:
+      operationId: getPlayer
+      tags: [player]
+      summary: Get player profile
+      parameters:
+        - name: address
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Player profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Player"
+        "404":
+          description: Player not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    put:
+      operationId: upsertPlayer
+      tags: [player]
+      summary: Create or update player profile
+      parameters:
+        - name: address
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlayerInput"
+      responses:
+        "200":
+          description: Upserted player
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Player"
+
+  /players/{address}/stats:
+    get:
+      operationId: getPlayerStats
+      tags: [player]
+      summary: Get detailed player statistics
+      parameters:
+        - name: address
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Player stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlayerStats"
+        "404":
+          description: Player not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  # ─── Game ─────────────────────────────────────────────────────────────────
+  /game/spin:
+    post:
+      operationId: recordSpin
+      tags: [game]
+      summary: Record a spin result and update player stats
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SpinInput"
+      responses:
+        "200":
+          description: Spin result recorded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SpinResult"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "429":
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /game/daily-reward/{address}:
+    get:
+      operationId: getDailyRewardStatus
+      tags: [game]
+      summary: Check if player has claimed today's daily reward
+      parameters:
+        - name: address
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Daily reward status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DailyRewardStatus"
+    post:
+      operationId: claimDailyReward
+      tags: [game]
+      summary: Claim daily reward
+      parameters:
+        - name: address
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Reward claimed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DailyRewardClaim"
+        "400":
+          description: Already claimed or bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /game/config:
+    get:
+      operationId: getGameConfig
+      tags: [game]
+      summary: Get public game configuration (jackpot, spin cost, etc.)
+      responses:
+        "200":
+          description: Game config
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GameConfig"
+
+  # ─── Leaderboard ──────────────────────────────────────────────────────────
+  /leaderboard:
+    get:
+      operationId: getLeaderboard
+      tags: [leaderboard]
+      summary: Get top players leaderboard
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: number
+            default: 50
+        - name: sortBy
+          in: query
+          schema:
+            type: string
+            enum: [highScore, totalWinnings, totalSpins]
+            default: highScore
+      responses:
+        "200":
+          description: Leaderboard entries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LeaderboardEntry"
+
+  # ─── Achievements ─────────────────────────────────────────────────────────
+  /achievements/{address}:
+    get:
+      operationId: getAchievements
+      tags: [achievements]
+      summary: Get player achievements
+      parameters:
+        - name: address
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Player achievements
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Achievement"
+
+  /achievements/{address}/unlock:
+    post:
+      operationId: unlockAchievement
+      tags: [achievements]
+      summary: Unlock an achievement for a player
+      parameters:
+        - name: address
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AchievementInput"
+      responses:
+        "200":
+          description: Achievement unlocked
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Achievement"
+        "409":
+          description: Already unlocked
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  # ─── Announcements ────────────────────────────────────────────────────────
+  /announcements:
+    get:
+      operationId: getAnnouncements
+      tags: [announcements]
+      summary: Get active announcements
+      responses:
+        "200":
+          description: Active announcements
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Announcement"
+
+  # ─── NFT ──────────────────────────────────────────────────────────────────
+  /nft/verify/{address}:
+    get:
+      operationId: verifyNft
+      tags: [nft]
+      summary: Server-side NFT ownership verification
+      parameters:
+        - name: address
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: NFT verification result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NftVerification"
+
+  # ─── Admin ────────────────────────────────────────────────────────────────
+  /admin/config:
+    get:
+      operationId: getAdminConfig
+      tags: [admin]
+      summary: Get full admin game configuration
+      responses:
+        "200":
+          description: Full game config
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminGameConfig"
+    put:
+      operationId: updateAdminConfig
+      tags: [admin]
+      summary: Update game configuration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminConfigInput"
+      responses:
+        "200":
+          description: Updated config
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminGameConfig"
+
+  /admin/stats:
+    get:
+      operationId: getAdminStats
+      tags: [admin]
+      summary: Get global game statistics for admin
+      responses:
+        "200":
+          description: Global stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminStats"
+
+  /admin/leaderboard/reset:
+    post:
+      operationId: resetLeaderboard
+      tags: [admin]
+      summary: Reset the leaderboard
+      responses:
+        "200":
+          description: Leaderboard reset
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /admin/announcements:
+    post:
+      operationId: createAnnouncement
+      tags: [admin]
+      summary: Create a new announcement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnnouncementInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Announcement"
+
+  /admin/announcements/{id}:
+    patch:
+      operationId: updateAnnouncement
+      tags: [admin]
+      summary: Update announcement (activate/deactivate)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnnouncementUpdate"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Announcement"
+    delete:
+      operationId: deleteAnnouncement
+      tags: [admin]
+      summary: Delete an announcement
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        "204":
+          description: Deleted
+
 components:
   schemas:
     HealthStatus:
       type: object
+      required: [status]
       properties:
         status:
           type: string
-      required:
-        - status
 
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+
+    SuccessResponse:
+      type: object
+      required: [success]
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+
+    # ─── Player ─────────────────────────────────────────────────────────────
+    Player:
+      type: object
+      required: [walletAddress, totalSpins, totalWins, highScore, totalWinnings, cheeseCollected, streakRecord, createdAt, lastPlayedAt]
+      properties:
+        walletAddress:
+          type: string
+        nickname:
+          type: ["string", "null"]
+        totalSpins:
+          type: number
+        totalWins:
+          type: number
+        highScore:
+          type: number
+        totalWinnings:
+          type: number
+        cheeseCollected:
+          type: number
+        streakRecord:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+        lastPlayedAt:
+          type: string
+          format: date-time
+
+    PlayerInput:
+      type: object
+      properties:
+        nickname:
+          type: string
+
+    PlayerStats:
+      type: object
+      required: [walletAddress, totalSpins, totalWins, highScore, totalWinnings, cheeseCollected, streakRecord, winRate, recentSpins]
+      properties:
+        walletAddress:
+          type: string
+        totalSpins:
+          type: number
+        totalWins:
+          type: number
+        highScore:
+          type: number
+        totalWinnings:
+          type: number
+        cheeseCollected:
+          type: number
+        streakRecord:
+          type: number
+        winRate:
+          type: number
+        recentSpins:
+          type: array
+          items:
+            $ref: "#/components/schemas/SpinHistory"
+
+    SpinHistory:
+      type: object
+      required: [id, symbols, winAmount, cheeseEarned, isJackpot, spunAt]
+      properties:
+        id:
+          type: number
+        symbols:
+          type: array
+          items:
+            type: string
+        winAmount:
+          type: number
+        cheeseEarned:
+          type: number
+        isJackpot:
+          type: boolean
+        spunAt:
+          type: string
+          format: date-time
+
+    # ─── Game ───────────────────────────────────────────────────────────────
+    SpinInput:
+      type: object
+      required: [walletAddress, symbols, winAmount, cheeseEarned, isJackpot, clientSeed]
+      properties:
+        walletAddress:
+          type: string
+        symbols:
+          type: array
+          items:
+            type: string
+          minItems: 3
+          maxItems: 3
+        winAmount:
+          type: number
+        cheeseEarned:
+          type: number
+        isJackpot:
+          type: boolean
+        clientSeed:
+          type: string
+
+    SpinResult:
+      type: object
+      required: [accepted, player, newBalance, newCheeseTotal]
+      properties:
+        accepted:
+          type: boolean
+        player:
+          $ref: "#/components/schemas/Player"
+        newBalance:
+          type: number
+        newCheeseTotal:
+          type: number
+        streakBonus:
+          type: number
+
+    DailyRewardStatus:
+      type: object
+      required: [claimed, canClaim, nextClaimAt]
+      properties:
+        claimed:
+          type: boolean
+        canClaim:
+          type: boolean
+        nextClaimAt:
+          type: ["string", "null"]
+          format: date-time
+
+    DailyRewardClaim:
+      type: object
+      required: [success, coinsAwarded, cheeseAwarded, streakDay]
+      properties:
+        success:
+          type: boolean
+        coinsAwarded:
+          type: number
+        cheeseAwarded:
+          type: number
+        streakDay:
+          type: number
+
+    GameConfig:
+      type: object
+      required: [spinCost, jackpotAmount, dailyRewardCoins, dailyRewardCheese, bonusSpinCheeseCost, maintenanceMode]
+      properties:
+        spinCost:
+          type: number
+        jackpotAmount:
+          type: number
+        dailyRewardCoins:
+          type: number
+        dailyRewardCheese:
+          type: number
+        bonusSpinCheeseCost:
+          type: number
+        maintenanceMode:
+          type: boolean
+        announcementBanner:
+          type: ["string", "null"]
+
+    # ─── Leaderboard ────────────────────────────────────────────────────────
+    LeaderboardEntry:
+      type: object
+      required: [rank, walletAddress, highScore, totalWinnings, totalSpins, totalWins]
+      properties:
+        rank:
+          type: number
+        walletAddress:
+          type: string
+        nickname:
+          type: ["string", "null"]
+        highScore:
+          type: number
+        totalWinnings:
+          type: number
+        totalSpins:
+          type: number
+        totalWins:
+          type: number
+
+    # ─── Achievements ────────────────────────────────────────────────────────
+    Achievement:
+      type: object
+      required: [id, walletAddress, achievementKey, title, description, icon, unlockedAt]
+      properties:
+        id:
+          type: number
+        walletAddress:
+          type: string
+        achievementKey:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        icon:
+          type: string
+        unlockedAt:
+          type: string
+          format: date-time
+
+    AchievementInput:
+      type: object
+      required: [achievementKey]
+      properties:
+        achievementKey:
+          type: string
+
+    # ─── Announcements ───────────────────────────────────────────────────────
+    Announcement:
+      type: object
+      required: [id, title, message, isActive, createdAt]
+      properties:
+        id:
+          type: number
+        title:
+          type: string
+        message:
+          type: string
+        isActive:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+
+    AnnouncementInput:
+      type: object
+      required: [title, message]
+      properties:
+        title:
+          type: string
+        message:
+          type: string
+        isActive:
+          type: boolean
+
+    AnnouncementUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+        message:
+          type: string
+        isActive:
+          type: boolean
+
+    # ─── NFT ─────────────────────────────────────────────────────────────────
+    NftVerification:
+      type: object
+      required: [address, hasNft, balance, verified]
+      properties:
+        address:
+          type: string
+        hasNft:
+          type: boolean
+        balance:
+          type: number
+        verified:
+          type: boolean
+
+    # ─── Admin ───────────────────────────────────────────────────────────────
+    AdminGameConfig:
+      type: object
+      required: [spinCost, jackpotAmount, dailyRewardCoins, dailyRewardCheese, bonusSpinCheeseCost, maintenanceMode, maxDailySpins]
+      properties:
+        spinCost:
+          type: number
+        jackpotAmount:
+          type: number
+        dailyRewardCoins:
+          type: number
+        dailyRewardCheese:
+          type: number
+        bonusSpinCheeseCost:
+          type: number
+        maintenanceMode:
+          type: boolean
+        maxDailySpins:
+          type: number
+        announcementBanner:
+          type: ["string", "null"]
+
+    AdminConfigInput:
+      type: object
+      properties:
+        spinCost:
+          type: number
+        jackpotAmount:
+          type: number
+        dailyRewardCoins:
+          type: number
+        dailyRewardCheese:
+          type: number
+        bonusSpinCheeseCost:
+          type: number
+        maintenanceMode:
+          type: boolean
+        maxDailySpins:
+          type: number
+        announcementBanner:
+          type: string
+
+    AdminStats:
+      type: object
+      required: [totalPlayers, totalSpins, totalWinnings, totalJackpots, activePlayers24h, avgWinRate]
+      properties:
+        totalPlayers:
+          type: number
+        totalSpins:
+          type: number
+        totalWinnings:
+          type: number
+        totalJackpots:
+          type: number
+        activePlayers24h:
+          type: number
+        avgWinRate:
+          type: number
