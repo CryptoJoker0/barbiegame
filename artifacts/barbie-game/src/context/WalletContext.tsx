@@ -16,6 +16,8 @@ interface WalletContextValue {
   disconnect: () => void;
   error: string | null;
   clearError: () => void;
+  /** Returns the raw injected provider for signing transactions */
+  getRawProvider: () => any | null;
 }
 
 const WalletContext = createContext<WalletContextValue | null>(null);
@@ -177,6 +179,7 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
       disconnect,
       error,
       clearError: () => setError(null),
+      getRawProvider: () => providerRef.current,
     }}>
       {children}
     </WalletContext.Provider>

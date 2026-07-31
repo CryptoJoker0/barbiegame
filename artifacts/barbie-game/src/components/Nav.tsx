@@ -17,7 +17,7 @@ export default function Nav() {
 
   const links = [
     { href: '/', label: 'Home' },
-    { href: '/game', label: 'Play' },
+    { href: '/games', label: 'Games' },
     { href: '/leaderboard', label: 'Leaderboard' },
     { href: '/profile', label: 'Profile' },
   ];
