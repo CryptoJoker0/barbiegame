@@ -75,6 +75,7 @@
     "zod": "catalog:"
   },
   "dependencies": {
+    "buffer": "^6.0.3",
     "ethers": "^5.8.0"
   }
 }

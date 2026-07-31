@@ -56,12 +56,18 @@ export default defineConfig({
         '..',
         'attached_assets',
       ),
+      // Polyfill Node.js Buffer for ethers.js in the browser
+      // Trailing slash forces Vite to use the npm package, not Node built-in
+      buffer: 'buffer/',
     },
     dedupe: ['react', 'react-dom'],
   },
   define: {
     // Polyfill for ethers.js / WalletConnect buffer usage in browser
     global: 'globalThis',
+  },
+  optimizeDeps: {
+    include: ['buffer'],
   },
   root: path.resolve(import.meta.dirname),
   build: {
