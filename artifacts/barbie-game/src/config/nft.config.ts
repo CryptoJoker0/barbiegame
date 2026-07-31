@@ -5,8 +5,12 @@
  * No other code changes are needed after updating this file.
  */
 export const NFT_CONFIG = {
-  /** AFRICA NFT ERC-721 contract address on X1 Blockchain */
-  contractAddress: '0x0000000000000000000000000000000000000000',
+  /** AFRICA NFT ERC-721 contract address on X1 Blockchain.
+   *  Set VITE_NFT_CONTRACT_ADDRESS env var to override at build time. */
+  contractAddress: (
+    import.meta.env.VITE_NFT_CONTRACT_ADDRESS ||
+    '0x0000000000000000000000000000000000000000'
+  ) as string,
 
   /** X1 Blockchain Chain ID */
   chainId: 204005,

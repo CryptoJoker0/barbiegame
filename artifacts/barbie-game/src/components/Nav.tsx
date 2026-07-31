@@ -28,7 +28,7 @@ export default function Nav() {
         <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <img src={barbieLogo} alt="BARBIEFUN-GAME" className="h-8 drop-shadow-[0_0_8px_rgba(255,20,147,0.8)]" />
+            <img src={barbieLogo} alt="BARBIEFUN-GAME" className="h-10 drop-shadow-[0_0_8px_rgba(255,20,147,0.8)]" />
             <span className="hidden sm:block font-black text-lg bg-clip-text text-transparent bg-gradient-to-r from-[#ff1493] to-[#ffd700] tracking-wider">
               BARBIEFUN-GAME
             </span>

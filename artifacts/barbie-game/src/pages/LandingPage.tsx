@@ -4,6 +4,7 @@ import { useWallet } from '@/context/WalletContext';
 import { WalletModal } from '@/components/WalletModal';
 import { useGetLeaderboard, useGetGameConfig } from '@workspace/api-client-react';
 import barbieLogo from '@/assets/barbie-logo.png';
+import barbieCover from '@/assets/barbie-cover.png';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
 // ── Scroll-reveal hook ─────────────────────────────────────────────────────────
@@ -117,11 +118,12 @@ export default function LandingPage() {
         ))}
 
         <div className="relative z-10 flex flex-col items-center gap-6 max-w-4xl">
+          {/* Cover image hero */}
           <div className="animate-float" style={{ animationDuration: '4s' }}>
             <img
-              src={barbieLogo}
+              src={barbieCover}
               alt="BARBIEFUN-GAME"
-              className="w-full max-w-[480px] drop-shadow-[0_0_50px_rgba(255,20,147,0.9)]"
+              className="w-full max-w-[500px] drop-shadow-[0_0_60px_rgba(255,20,147,0.95)]"
             />
           </div>
 
@@ -449,25 +451,27 @@ export default function LandingPage() {
             <div>
               <h4 className="font-black text-white text-sm mb-3 uppercase tracking-widest">Community</h4>
               <div className="space-y-2">
-                {['Twitter / X', 'Discord', 'Telegram'].map(s => (
-                  <span key={s} className="block text-[#ffb6c1]/70 text-sm">{s}</span>
-                ))}
+                <a href="https://x.com/BARBIEFUNV2" target="_blank" rel="noopener noreferrer" className="block text-[#ffb6c1]/70 hover:text-white text-sm transition-colors">Twitter / X</a>
+                <a href="https://t.me/barbiefunv2" target="_blank" rel="noopener noreferrer" className="block text-[#ffb6c1]/70 hover:text-white text-sm transition-colors">Telegram</a>
               </div>
             </div>
             {/* Support */}
             <div>
               <h4 className="font-black text-white text-sm mb-3 uppercase tracking-widest">Support</h4>
               <div className="space-y-2">
-                {['FAQ', 'Game Rules', 'Contact'].map(s => (
-                  <span key={s} className="block text-[#ffb6c1]/70 text-sm">{s}</span>
-                ))}
+                <a href="https://x.com/BARBIEFUNV2" target="_blank" rel="noopener noreferrer" className="block text-[#ffb6c1]/70 hover:text-white text-sm transition-colors">FAQ</a>
+                <a href="https://t.me/barbiefunv2" target="_blank" rel="noopener noreferrer" className="block text-[#ffb6c1]/70 hover:text-white text-sm transition-colors">Contact</a>
               </div>
             </div>
           </div>
-          <div className="border-t border-[#ff1493]/10 pt-6 text-center">
+          <div className="border-t border-[#ff1493]/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-[#ff69b4]/30 text-xs">
-              © 2024 BARBIEFUN-GAME. All rights reserved. Built on X1 Blockchain.
+              © 2025 BARBIEFUN-GAME. All rights reserved. Built on X1 Blockchain.
             </p>
+            <div className="flex items-center gap-4">
+              <a href="https://x.com/BARBIEFUNV2" target="_blank" rel="noopener noreferrer" className="text-[#ff69b4]/40 hover:text-[#ff1493] transition-colors text-xs font-bold tracking-wide">𝕏 @BARBIEFUNV2</a>
+              <a href="https://t.me/barbiefunv2" target="_blank" rel="noopener noreferrer" className="text-[#ff69b4]/40 hover:text-[#ff1493] transition-colors text-xs font-bold tracking-wide">Telegram</a>
+            </div>
           </div>
         </div>
       </footer>

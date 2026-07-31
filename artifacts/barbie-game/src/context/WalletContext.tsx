@@ -66,9 +66,6 @@ async function switchToX1(provider: any) {
 }
 
 async function checkNftOwnership(address: string, provider: any): Promise<boolean> {
-  if (NFT_CONFIG.contractAddress === '0x0000000000000000000000000000000000000000') {
-    return true; // demo passthrough
-  }
   const web3 = new ethers.providers.Web3Provider(provider);
   const contract = new ethers.Contract(
     NFT_CONFIG.contractAddress,

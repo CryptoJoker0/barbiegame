@@ -59,6 +59,10 @@ export default defineConfig({
     },
     dedupe: ['react', 'react-dom'],
   },
+  define: {
+    // Polyfill for ethers.js / WalletConnect buffer usage in browser
+    global: 'globalThis',
+  },
   root: path.resolve(import.meta.dirname),
   build: {
     outDir: path.resolve(import.meta.dirname, 'dist/public'),
