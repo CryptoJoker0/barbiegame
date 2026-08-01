@@ -93,7 +93,7 @@ function AppRouter() {
   const showNav = loc !== '/game';
 
   return (
-    <div className="min-h-[100dvh] w-full bg-background dark">
+    <div className="min-h-[100dvh] w-full bg-transparent">
       {showNav && <Nav />}
       <Switch>
         <Route path="/" component={LandingPage} />

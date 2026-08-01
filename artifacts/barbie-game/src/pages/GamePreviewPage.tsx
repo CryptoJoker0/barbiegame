@@ -177,7 +177,7 @@ export default function GamePreviewPage({ params }: { params: { id: string } }) 
   // ── Loading / error ───────────────────────────────────────────────────────────
   if (loadError) {
     return (
-      <div className="min-h-screen bg-[#0d0013] flex items-center justify-center p-4">
+      <div className="min-h-screen bg-transparent flex items-center justify-center p-4">
         <div className="text-center">
           <p className="text-red-400 font-bold mb-4">{loadError}</p>
           <Link href="/games"><button className="px-6 py-3 rounded-xl bg-[#ff1493]/20 border border-[#ff1493]/40 text-[#ff69b4] font-bold">← Back to Games</button></Link>
@@ -188,7 +188,7 @@ export default function GamePreviewPage({ params }: { params: { id: string } }) 
 
   if (!game) {
     return (
-      <div className="min-h-screen bg-[#0d0013] flex items-center justify-center">
+      <div className="min-h-screen bg-transparent flex items-center justify-center">
         <div className="text-[#ff69b4] font-bold animate-pulse">Loading game…</div>
       </div>
     );
@@ -211,7 +211,7 @@ export default function GamePreviewPage({ params }: { params: { id: string } }) 
   // ── SUCCESS ───────────────────────────────────────────────────────────────────
   if (step === 'success') {
     return (
-      <div className="min-h-screen bg-[#0d0013] flex items-center justify-center p-4">
+      <div className="min-h-screen bg-transparent flex items-center justify-center p-4">
         <div className="text-center flex flex-col items-center gap-6 max-w-sm">
           <div className="w-20 h-20 rounded-full bg-green-500/20 border-2 border-green-400 flex items-center justify-center">
             <CheckCircle className="w-10 h-10 text-green-400" />
@@ -241,7 +241,7 @@ export default function GamePreviewPage({ params }: { params: { id: string } }) 
   // ── NO NFT ────────────────────────────────────────────────────────────────────
   if (step === 'no-nft') {
     return (
-      <div className="min-h-screen bg-[#0d0013] flex items-center justify-center p-4">
+      <div className="min-h-screen bg-transparent flex items-center justify-center p-4">
         <div className="text-center flex flex-col items-center gap-6 max-w-md">
           <div className="w-20 h-20 rounded-full bg-red-500/20 border-2 border-red-500/50 flex items-center justify-center">
             <AlertTriangle className="w-10 h-10 text-red-400" />
@@ -279,7 +279,7 @@ export default function GamePreviewPage({ params }: { params: { id: string } }) 
   // ── PAYING ────────────────────────────────────────────────────────────────────
   if (step === 'paying') {
     return (
-      <div className="min-h-screen bg-[#0d0013] flex items-center justify-center p-4">
+      <div className="min-h-screen bg-transparent flex items-center justify-center p-4">
         <div className="text-center flex flex-col items-center gap-6">
           <div className="w-20 h-20 rounded-full border-4 border-[#ff1493]/30 border-t-[#ff1493] animate-spin" />
           <div>
@@ -294,7 +294,7 @@ export default function GamePreviewPage({ params }: { params: { id: string } }) 
 
   // ── PREVIEW + CONNECT + PAY (main layout) ─────────────────────────────────────
   return (
-    <div className="min-h-screen bg-[#0d0013] text-white">
+    <div className="min-h-screen bg-transparent text-white">
       {/* Background glow */}
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_20%,rgba(255,20,147,0.12)_0%,transparent_70%)] pointer-events-none" />
 

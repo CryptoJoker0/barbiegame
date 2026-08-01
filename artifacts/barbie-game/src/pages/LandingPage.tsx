@@ -96,7 +96,7 @@ export default function LandingPage() {
   const jackpot = gameConfig?.jackpotAmount ?? 1000;
 
   return (
-    <div className="min-h-screen bg-[#0d0013] text-white">
+    <div className="min-h-screen bg-transparent text-white">
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
       <section className="relative min-h-[92vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden">
         {/* Radial glow bg */}

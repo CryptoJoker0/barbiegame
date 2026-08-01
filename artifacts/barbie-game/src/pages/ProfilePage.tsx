@@ -169,7 +169,7 @@ export default function ProfilePage() {
   // ── Not connected ─────────────────────────────────────────────────────────
   if (!isConnected) {
     return (
-      <div className="min-h-screen bg-[#0d0013] flex items-center justify-center px-4">
+      <div className="min-h-screen bg-transparent flex items-center justify-center px-4">
         <div className="rounded-3xl border border-[#ff1493]/30 bg-[#110520] p-10 text-center max-w-md">
           <div className="text-6xl mb-4">🔒</div>
           <h2 className="text-2xl font-black text-white mb-3">Connect Your Wallet</h2>
@@ -190,7 +190,7 @@ export default function ProfilePage() {
 
   // ── Connected ─────────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-[#0d0013] text-white">
+    <div className="min-h-screen bg-transparent text-white">
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_60%_30%_at_50%_0%,rgba(255,20,147,0.1)_0%,transparent_70%)] pointer-events-none" />
       <div className="max-w-4xl mx-auto px-4 py-10 relative z-10 space-y-8">
 

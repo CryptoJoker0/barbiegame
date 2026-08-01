@@ -31,7 +31,7 @@ export default function LeaderboardPage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#0d0013] px-4 py-10">
+    <div className="min-h-screen bg-transparent px-4 py-10">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10">

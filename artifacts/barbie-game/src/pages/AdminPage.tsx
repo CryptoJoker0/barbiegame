@@ -48,7 +48,7 @@ export default function AdminPage() {
 
   if (!isConnected) {
     return (
-      <div className="min-h-screen bg-[#0d0013] flex items-center justify-center px-4">
+      <div className="min-h-screen bg-transparent flex items-center justify-center px-4">
         <div className="glass-card rounded-3xl p-10 text-center max-w-md">
           <div className="text-5xl mb-4">🔒</div>
           <h2 className="text-2xl font-black text-white mb-2">Connect Wallet</h2>
@@ -60,7 +60,7 @@ export default function AdminPage() {
 
   if (!isAdmin) {
     return (
-      <div className="min-h-screen bg-[#0d0013] flex items-center justify-center px-4">
+      <div className="min-h-screen bg-transparent flex items-center justify-center px-4">
         <div className="glass-card rounded-3xl p-10 text-center max-w-md border-red-500/30">
           <div className="text-5xl mb-4">🚫</div>
           <h2 className="text-2xl font-black text-white mb-2">Unauthorized</h2>
@@ -125,7 +125,7 @@ export default function AdminPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0d0013] flex">
+    <div className="min-h-screen bg-transparent flex">
       {/* Sidebar */}
       <aside className="hidden md:flex flex-col w-52 border-r border-[#ff1493]/20 bg-[#0a000f] p-4 gap-1 pt-6">
         <div className="text-[#ff69b4]/40 text-xs uppercase tracking-widest font-bold mb-4 px-2">Admin</div>

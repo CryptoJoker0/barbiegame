@@ -52,18 +52,18 @@ function GameCard({ game }: { game: Game }) {
       {/* Info */}
       <div className="flex flex-col gap-3 p-5 flex-1">
         <h3 className="font-black text-white text-lg leading-snug">{game.name}</h3>
-        <p className="text-[#ffb6c1]/70 text-sm leading-relaxed flex-1">{game.shortDescription}</p>
+        <p className="text-[#9c1a5e]/80 text-sm leading-relaxed flex-1 font-medium">{game.shortDescription}</p>
 
         {/* Requirements */}
         <div className="flex flex-col gap-1.5 py-3 border-t border-[#ff1493]/10">
           {game.nftRequired && (
-            <div className="flex items-center gap-2 text-xs text-[#ff69b4]/80">
-              <span className="text-[#ffd700]">◆</span>
+            <div className="flex items-center gap-2 text-xs text-[#7a1048]/80 font-semibold">
+              <span className="text-[#c8860a]">◆</span>
               Hold at least 1 AFRICA X1 NFT
             </div>
           )}
-          <div className="flex items-center gap-2 text-xs text-[#ff69b4]/80">
-            <span className="text-[#ff1493]">◆</span>
+          <div className="flex items-center gap-2 text-xs text-[#7a1048]/80 font-semibold">
+            <span className="text-[#e91e8c]">◆</span>
             Entry fee: {feeDisplay}
           </div>
         </div>
@@ -114,7 +114,7 @@ export default function GamesPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0d0013] text-white">
+    <div className="min-h-screen bg-transparent text-white">
       {/* Header */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(255,20,147,0.18)_0%,transparent_70%)] pointer-events-none" />
@@ -126,7 +126,7 @@ export default function GamesPage() {
           <h1 className="text-4xl md:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#ff1493] via-[#ff69b4] to-[#ffd700] mb-4">
             Browse Games
           </h1>
-          <p className="text-[#ffb6c1]/70 text-lg max-w-xl mx-auto">
+          <p className="text-[#9c1a5e]/80 text-lg max-w-xl mx-auto font-medium">
             Exclusive games for AFRICA NFT holders. Explore freely — connect your wallet when you're ready to play.
           </p>
         </div>
@@ -157,7 +157,7 @@ export default function GamesPage() {
         )}
 
         {/* Legend */}
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-xs text-[#ff69b4]/50">
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-xs text-[#9c1a5e]/70">
           <span className="flex items-center gap-1.5">
             <span className="text-[#ffd700]">◆</span> AFRICA X1 NFT required to play
           </span>
