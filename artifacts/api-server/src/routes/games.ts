@@ -5,7 +5,7 @@ import { eq } from "drizzle-orm";
 
 const router = Router();
 
-/** Initial game catalog — seeded on first request if the table is empty */
+/** Initial game catalog — upserted on every cold start */
 const SEED_GAMES = [
   {
     id: "slot-machine",
@@ -16,6 +16,7 @@ const SEED_GAMES = [
       "Match symbols to win Coins and Cheese Points. " +
       "Land three 7️⃣ symbols to trigger the Mega Jackpot. " +
       "Compete on the global leaderboard and unlock achievements.",
+    imageUrl: "/barbie-game/assets/game-777.jpg",
     entryFee: "1.0",
     feeCurrency: "XEN",
     rules: [
@@ -38,18 +39,104 @@ const SEED_GAMES = [
     nftRequired: true,
     isActive: true,
   },
-] as const;
+  {
+    id: "barbie-prediction",
+    name: "BARBIE_X1 Prediction Game",
+    shortDescription: "Predict X1 price movements and Win Big!",
+    description:
+      "BARBIE_X1 Prediction Game is a price-prediction challenge powered by the X1 Blockchain. " +
+      "Call whether X1 token price will go UP or DOWN before each round closes. " +
+      "Get it right and earn Coins & Cheese Points. Beat the house — Beat me if you can!",
+    imageUrl: "/barbie-game/assets/game-prediction.jpg",
+    entryFee: "1.0",
+    feeCurrency: "XEN",
+    rules: [
+      "Connect your wallet and verify you hold at least 1 AFRICA X1 NFT.",
+      "Pay the entry fee (1 XEN) to the AFRICA X1 Treasury Wallet.",
+      "Each round lasts 60 seconds — predict UP or DOWN before time runs out.",
+      "Market sentiment indicator gives you a directional hint.",
+      "Correct prediction → earn reward. Wrong → try next round.",
+      "Rounds reset automatically — you can play unlimited rounds per session.",
+      "No real-money payouts — all winnings are in-game currency.",
+    ].join("\n"),
+    rewards: [
+      "🏆 Big Win — Consecutive correct predictions multiply your reward",
+      "💰 Coins — Earned for every correct call",
+      "🧀 Cheese Points — Bonus on streaks of 3+ correct predictions",
+      "🎁 Daily Reward — Free entry bonus every 24 hours",
+      "🥇 Leaderboard — Rank by total correct predictions",
+    ].join("\n"),
+    nftRequired: true,
+    isActive: true,
+  },
+  {
+    id: "barbie-wott",
+    name: "BARBIE_WOTT",
+    shortDescription: "Roll, Strategize, Outsmart — Win Big on the Mystic Board!",
+    description:
+      "BARBIE_WOTT is a mystic board game exclusive to AFRICA NFT holders. " +
+      "Roll the dice, land on special tiles — Roll Again, Double Reward, Extra Turn, Safe Zone — " +
+      "and outsmart your opponents to claim the WOTT crown. Mystic & Cool.",
+    imageUrl: "/barbie-game/assets/game-wott.jpg",
+    entryFee: "1.0",
+    feeCurrency: "XEN",
+    rules: [
+      "Connect your wallet and verify you hold at least 1 AFRICA X1 NFT.",
+      "Pay the entry fee (1 XEN) to the AFRICA X1 Treasury Wallet.",
+      "Roll the dice each turn to advance on the board.",
+      "Special tiles: Roll Again, Double Reward, Extra Turn, Safe Zone, Bonus.",
+      "Reach the WOTT crown tile to win the round.",
+      "Strategy matters — plan your moves to land on bonus tiles.",
+      "No real-money payouts — all winnings are in-game currency.",
+    ].join("\n"),
+    rewards: [
+      "👑 WOTT Crown — First to reach the crown wins the round",
+      "⭐ Double Reward — Land the tile to instantly double your Coins",
+      "🎲 Extra Turn — Roll again without waiting",
+      "💰 Coins — Earned each round you complete",
+      "🏆 Leaderboard — Track wins across all WOTT sessions",
+    ].join("\n"),
+    nftRequired: true,
+    isActive: true,
+  },
+];
 
-async function seedIfEmpty() {
-  const existing = await db.query.gamesTable.findFirst();
-  if (!existing) {
-    await db.insert(gamesTable).values(SEED_GAMES as any[]).onConflictDoNothing();
+let seeded = false;
+
+async function seedGames() {
+  if (seeded) return;
+  seeded = true;
+  try {
+    // Upsert all seed games so image URLs and descriptions stay current
+    for (const game of SEED_GAMES) {
+      await db
+        .insert(gamesTable)
+        .values(game as any)
+        .onConflictDoUpdate({
+          target: gamesTable.id,
+          set: {
+            name: game.name,
+            shortDescription: game.shortDescription,
+            description: game.description,
+            imageUrl: game.imageUrl,
+            entryFee: game.entryFee,
+            feeCurrency: game.feeCurrency,
+            rules: game.rules,
+            rewards: game.rewards,
+            nftRequired: game.nftRequired,
+            isActive: game.isActive,
+          },
+        });
+    }
+  } catch (err) {
+    seeded = false; // allow retry on next request
+    console.error("Game seed failed:", err);
   }
 }
 
 // GET /games
 router.get("/games", async (_req, res) => {
-  await seedIfEmpty();
+  await seedGames();
   const games = await db.query.gamesTable.findMany({
     where: eq(gamesTable.isActive, true),
     orderBy: (t, { asc }) => [asc(t.createdAt)],
@@ -59,7 +146,7 @@ router.get("/games", async (_req, res) => {
 
 // GET /games/:id
 router.get("/games/:id", async (req, res) => {
-  await seedIfEmpty();
+  await seedGames();
   const { id } = req.params;
   const game = await db.query.gamesTable.findFirst({
     where: eq(gamesTable.id, id),

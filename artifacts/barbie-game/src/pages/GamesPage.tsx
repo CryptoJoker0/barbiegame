@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'wouter';
-import barbieCover from '@/assets/barbie-cover.png';
+import game777 from '@/assets/game-777.jpg';
+import gamePrediction from '@/assets/game-prediction.jpg';
+import gameWott from '@/assets/game-wott.jpg';
 
 interface Game {
   id: string;
@@ -15,12 +17,15 @@ interface Game {
 
 // Map game IDs to imported assets for reliable bundling
 const GAME_IMAGES: Record<string, string> = {
-  'slot-machine': barbieCover,
+  'slot-machine': game777,
+  'barbie-prediction': gamePrediction,
+  'barbie-wott': gameWott,
 };
 
 function GameCard({ game }: { game: Game }) {
   const img = GAME_IMAGES[game.id] ?? game.imageUrl ?? barbieCover;
   const fee = parseFloat(game.entryFee);
+  const feeDisplay = fee === 0 ? 'FREE' : `${Number(game.entryFee).toLocaleString(undefined, { maximumFractionDigits: 4 })} ${game.feeCurrency}`;
 
   return (
     <div className="group relative flex flex-col rounded-3xl overflow-hidden border border-[#ff1493]/25 bg-[#110520] hover:border-[#ff1493]/70 transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,20,147,0.3)]">
@@ -40,7 +45,7 @@ function GameCard({ game }: { game: Game }) {
         )}
         {/* Entry fee badge */}
         <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-[#ff1493]/20 border border-[#ff1493]/50 text-[#ff69b4] text-[10px] font-black tracking-wider">
-          {fee === 0 ? 'FREE' : `${game.entryFee} ${game.feeCurrency}`}
+          {feeDisplay}
         </div>
       </div>
 
@@ -59,7 +64,7 @@ function GameCard({ game }: { game: Game }) {
           )}
           <div className="flex items-center gap-2 text-xs text-[#ff69b4]/80">
             <span className="text-[#ff1493]">◆</span>
-            Entry fee: {fee === 0 ? 'Free' : `${game.entryFee} ${game.feeCurrency}`}
+            Entry fee: {feeDisplay}
           </div>
         </div>
 

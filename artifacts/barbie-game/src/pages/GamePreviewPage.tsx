@@ -3,7 +3,9 @@ import { Link, useLocation } from 'wouter';
 import { ethers } from 'ethers';
 import { useWallet } from '@/context/WalletContext';
 import { WalletModal } from '@/components/WalletModal';
-import barbieCover from '@/assets/barbie-cover.png';
+import game777 from '@/assets/game-777.jpg';
+import gamePrediction from '@/assets/game-prediction.jpg';
+import gameWott from '@/assets/game-wott.jpg';
 import barbieLogo from '@/assets/barbie-logo.png';
 import { CheckCircle, AlertTriangle, Wallet, Coins, ShieldCheck, ExternalLink } from 'lucide-react';
 
@@ -20,7 +22,9 @@ interface Game {
 }
 
 const GAME_IMAGES: Record<string, string> = {
-  'slot-machine': barbieCover,
+  'slot-machine': game777,
+  'barbie-prediction': gamePrediction,
+  'barbie-wott': gameWott,
 };
 
 type Step = 'preview' | 'connect' | 'no-nft' | 'pay' | 'paying' | 'success';
