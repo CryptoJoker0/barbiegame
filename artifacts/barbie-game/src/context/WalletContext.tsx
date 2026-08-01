@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 import { NFT_CONFIG, X1_CHAIN_PARAMS } from '@/config/nft.config';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-export type WalletId = 'phantom' | 'backpack' | 'metamask' | 'x1web' | 'x1mobile';
+export type WalletId = 'phantom' | 'backpack' | 'wewallet' | 'x1web' | 'x1mobile';
 
 interface WalletContextValue {
   walletAddress: string | null;
@@ -34,6 +34,10 @@ declare global {
     ethereum?: any;
     phantom?: { ethereum?: any };
     backpack?: { ethereum?: any };
+    we?: { ethereum?: any };                // WE Wallet EVM namespace
+    weWallet?: any;                         // WE Wallet alternative
+    okxwallet?: { ethereum?: any };
+    providers?: any[];
   }
 }
 
@@ -43,8 +47,9 @@ function getProvider(id: WalletId): any | null {
       return window.phantom?.ethereum ?? (window.ethereum?.isPhantom ? window.ethereum : null);
     case 'backpack':
       return window.backpack?.ethereum ?? (window.ethereum?.isBackpack ? window.ethereum : null);
-    case 'metamask':
-      return window.ethereum?.isMetaMask ? window.ethereum : null;
+    case 'wewallet':
+      // WE Wallet injects under window.we.ethereum or window.weWallet, fallback to generic
+      return window.we?.ethereum ?? window.weWallet ?? (window.ethereum?.isWEWallet ? window.ethereum : window.ethereum ?? null);
     case 'x1web':
       return window.ethereum ?? null;
     default:
@@ -104,7 +109,6 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
       return;
     }
     if (id === 'x1web') {
-      // Try injected provider first, else open web wallet
       const provider = getProvider('x1web');
       if (!provider) {
         window.open('https://wallet.x1blockchain.net', '_blank');
@@ -115,11 +119,11 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
     const provider = getProvider(id);
     if (!provider) {
       const installUrls: Record<WalletId, string> = {
-        phantom: 'https://phantom.app',
-        backpack: 'https://backpack.app',
-        metamask: 'https://metamask.io',
-        x1web: 'https://wallet.x1blockchain.net',
-        x1mobile: 'https://testflight.apple.com/join/sxpTfavs',
+        phantom:   'https://phantom.app',
+        backpack:  'https://backpack.app',
+        wewallet:  'https://wewallet.io',
+        x1web:     'https://wallet.x1blockchain.net',
+        x1mobile:  'https://testflight.apple.com/join/sxpTfavs',
       };
       window.open(installUrls[id], '_blank');
       return;
@@ -142,7 +146,7 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
       setWalletAddress(address);
       setWalletId(id);
       setHasNft(nft);
-      if (!nft) setError('You need an AFRICA NFT to enter the game.');
+      if (!nft) setError('You need an AFRICA X1 NFT to enter the game.');
     } catch (err: any) {
       if (err.code === 4001) {
         setError('Connection cancelled.');

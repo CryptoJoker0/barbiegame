@@ -17,7 +17,7 @@ const SEED_GAMES = [
       "Land three 7️⃣ symbols to trigger the Mega Jackpot. " +
       "Compete on the global leaderboard and unlock achievements.",
     imageUrl: "/barbie-game/assets/game-777.jpg",
-    entryFee: "1.0",
+    entryFee: "4.0",
     feeCurrency: "XEN",
     rules: [
       "Connect your wallet and verify you hold at least 1 AFRICA X1 NFT.",
@@ -48,11 +48,11 @@ const SEED_GAMES = [
       "Call whether X1 token price will go UP or DOWN before each round closes. " +
       "Get it right and earn Coins & Cheese Points. Beat the house — Beat me if you can!",
     imageUrl: "/barbie-game/assets/game-prediction.jpg",
-    entryFee: "1.0",
+    entryFee: "4.0",
     feeCurrency: "XEN",
     rules: [
       "Connect your wallet and verify you hold at least 1 AFRICA X1 NFT.",
-      "Pay the entry fee (1 XEN) to the AFRICA X1 Treasury Wallet.",
+      "Pay the entry fee (4 XEN) to the AFRICA X1 Treasury Wallet.",
       "Each round lasts 60 seconds — predict UP or DOWN before time runs out.",
       "Market sentiment indicator gives you a directional hint.",
       "Correct prediction → earn reward. Wrong → try next round.",
@@ -78,11 +78,11 @@ const SEED_GAMES = [
       "Roll the dice, land on special tiles — Roll Again, Double Reward, Extra Turn, Safe Zone — " +
       "and outsmart your opponents to claim the WOTT crown. Mystic & Cool.",
     imageUrl: "/barbie-game/assets/game-wott.jpg",
-    entryFee: "1.0",
+    entryFee: "4.0",
     feeCurrency: "XEN",
     rules: [
       "Connect your wallet and verify you hold at least 1 AFRICA X1 NFT.",
-      "Pay the entry fee (1 XEN) to the AFRICA X1 Treasury Wallet.",
+      "Pay the entry fee (4 XEN) to the AFRICA X1 Treasury Wallet.",
       "Roll the dice each turn to advance on the board.",
       "Special tiles: Roll Again, Double Reward, Extra Turn, Safe Zone, Bonus.",
       "Reach the WOTT crown tile to win the round.",

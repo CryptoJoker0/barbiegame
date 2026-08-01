@@ -1,6 +1,7 @@
 import { useWallet, type WalletId } from '@/context/WalletContext';
 import { useEffect } from 'react';
 
+// ── Icons ─────────────────────────────────────────────────────────────────────
 const PhantomIcon = () => (
   <svg viewBox="0 0 128 128" fill="none" className="w-9 h-9 flex-shrink-0">
     <rect width="128" height="128" rx="26" fill="#AB9FF2" />
@@ -17,17 +18,11 @@ const BackpackIcon = () => (
   </svg>
 );
 
-const MetaMaskIcon = () => (
+const WEWalletIcon = () => (
   <svg viewBox="0 0 128 128" fill="none" className="w-9 h-9 flex-shrink-0">
-    <rect width="128" height="128" rx="26" fill="#F6851B" />
-    <path d="M98 24L66 48l6-16L98 24z" fill="#E17726" />
-    <path d="M30 24l31.6 24.4-5.6-16L30 24z" fill="#E27625" />
-    <path d="M87 86l-8 13 18 5 5-18-15 0z" fill="#E27625" />
-    <path d="M26 86l5 18 18-5-8-13-15 0z" fill="#E27625" />
-    <path d="M48 61l-5 8 18 1-1-19-12 10z" fill="#E27625" />
-    <path d="M80 61l-12-10-1 19 18-1-5-8z" fill="#E27625" />
-    <path d="M49 99l11-5-9-7-2 12z" fill="#D5BFB2" />
-    <path d="M68 94l11 5-2-12-9 7z" fill="#D5BFB2" />
+    <rect width="128" height="128" rx="26" fill="#0A0A1A" />
+    <circle cx="64" cy="64" r="36" fill="none" stroke="#ff1493" strokeWidth="5" />
+    <text x="50%" y="56%" dominantBaseline="middle" textAnchor="middle" fill="#ff1493" fontSize="30" fontWeight="900" fontFamily="monospace">WE</text>
   </svg>
 );
 
@@ -39,18 +34,65 @@ const X1Icon = () => (
   </svg>
 );
 
-const WALLETS: { id: WalletId; name: string; desc: string; icon: React.ReactNode; badge?: string }[] = [
-  { id: 'phantom', name: 'Phantom', desc: 'Browser extension', icon: <PhantomIcon /> },
-  { id: 'backpack', name: 'Backpack', desc: 'Browser extension', icon: <BackpackIcon /> },
-  { id: 'metamask', name: 'MetaMask', desc: 'Browser extension', icon: <MetaMaskIcon /> },
-  { id: 'x1web', name: 'X1 Web Wallet', desc: 'Official X1 Blockchain wallet', icon: <X1Icon />, badge: 'Open ↗' },
-  { id: 'x1mobile', name: 'X1 Mobile', desc: 'iOS via TestFlight', icon: <X1Icon />, badge: 'iOS ↗' },
+const IOSIcon = () => (
+  <svg viewBox="0 0 128 128" fill="none" className="w-9 h-9 flex-shrink-0">
+    <rect width="128" height="128" rx="26" fill="#1C1C1E" />
+    {/* Apple logo simplified */}
+    <path d="M79 34c-3.5 4.5-9.5 8-15 7.5 0-5.5 3-11 7-14.5C74.5 22.5 80.5 19.5 86 20c0 5.5-3 11-7 14z" fill="white"/>
+    <path d="M86.5 48c-3.5-0.2-9.5 2-13 2s-9-2-13-2c-8 0-20 9-20 26 0 17 12 36 20 36 4 0 7.5-2.5 12-2.5s8.5 2.5 12 2.5c8 0 20-18 20-36 0-2.5-8.5-2.5-18-26z" fill="white"/>
+  </svg>
+);
+
+// ── Wallet list ───────────────────────────────────────────────────────────────
+const WALLETS: {
+  id: WalletId;
+  name: string;
+  desc: string;
+  icon: React.ReactNode;
+  badge?: string;
+  installUrl?: string;
+}[] = [
+  {
+    id: 'phantom',
+    name: 'Phantom',
+    desc: 'Browser extension · X1 Blockchain',
+    icon: <PhantomIcon />,
+    installUrl: 'https://phantom.app',
+  },
+  {
+    id: 'backpack',
+    name: 'Backpack',
+    desc: 'Browser extension · X1 Blockchain',
+    icon: <BackpackIcon />,
+    installUrl: 'https://backpack.app',
+  },
+  {
+    id: 'wewallet',
+    name: 'WE Wallet',
+    desc: 'Browser extension · X1 native',
+    icon: <WEWalletIcon />,
+    installUrl: 'https://wewallet.io',
+  },
+  {
+    id: 'x1web',
+    name: 'X1 Web Wallet',
+    desc: 'Official X1 Blockchain web wallet',
+    icon: <X1Icon />,
+    badge: 'Open ↗',
+  },
+  {
+    id: 'x1mobile',
+    name: 'X1 Mobile (iOS)',
+    desc: 'Install via TestFlight',
+    icon: <IOSIcon />,
+    badge: 'TestFlight ↗',
+  },
 ];
 
-function isInstalled(id: WalletId) {
-  if (id === 'phantom') return !!(window.phantom?.ethereum || window.ethereum?.isPhantom);
+function isInstalled(id: WalletId): boolean {
+  if (id === 'phantom')  return !!(window.phantom?.ethereum || window.ethereum?.isPhantom);
   if (id === 'backpack') return !!(window.backpack?.ethereum || window.ethereum?.isBackpack);
-  if (id === 'metamask') return !!window.ethereum?.isMetaMask;
+  if (id === 'wewallet') return !!(window.we?.ethereum || window.weWallet || window.ethereum?.isWEWallet);
   return false;
 }
 
@@ -82,14 +124,15 @@ export function WalletModal({ onClose, onSuccess }: WalletModalProps) {
       onClick={e => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div className="w-full max-w-md bg-[#0d0013] border border-[#ff1493]/40 rounded-3xl p-6 shadow-[0_0_60px_rgba(255,20,147,0.3)]">
-        <div className="flex items-center justify-between mb-5">
+        <div className="flex items-center justify-between mb-2">
           <h2 className="text-xl font-black text-white">Connect Wallet</h2>
           <button onClick={onClose} className="text-white/40 hover:text-white text-2xl leading-none">&times;</button>
         </div>
+        <p className="text-[#ff69b4]/50 text-xs mb-5">All wallets connect on X1 Blockchain (Chain ID 204005)</p>
 
         {busy && (
           <div className="text-center text-[#ff69b4] font-bold py-3 animate-pulse">
-            {isCheckingNft ? 'Verifying AFRICA NFT...' : 'Connecting...'}
+            {isCheckingNft ? 'Verifying AFRICA X1 NFT…' : 'Connecting…'}
           </div>
         )}
         {error && (
@@ -100,8 +143,8 @@ export function WalletModal({ onClose, onSuccess }: WalletModalProps) {
 
         <div className="flex flex-col gap-2">
           {WALLETS.map(w => {
-            const installed = isInstalled(w.id);
             const isExtension = !w.badge;
+            const installed = isExtension ? isInstalled(w.id) : null;
             return (
               <button
                 key={w.id}
@@ -112,15 +155,19 @@ export function WalletModal({ onClose, onSuccess }: WalletModalProps) {
                 {w.icon}
                 <div className="flex-1 min-w-0">
                   <div className="font-black text-white text-sm">{w.name}</div>
-                  <div className="text-[#ff69b4] text-xs">{w.desc}</div>
+                  <div className="text-[#ff69b4]/60 text-xs">{w.desc}</div>
                 </div>
                 {isExtension && (
-                  <span className={`text-xs font-bold px-2 py-0.5 rounded-full border ${installed ? 'bg-green-900/40 text-green-400 border-green-700/50' : 'bg-transparent text-[#ff69b4] border-[#ff1493]/30'}`}>
+                  <span className={`text-xs font-bold px-2 py-0.5 rounded-full border flex-shrink-0 ${
+                    installed
+                      ? 'bg-green-900/40 text-green-400 border-green-700/50'
+                      : 'bg-transparent text-[#ff69b4]/60 border-[#ff1493]/30'
+                  }`}>
                     {installed ? 'Installed' : 'Install ↗'}
                   </span>
                 )}
                 {w.badge && (
-                  <span className="text-xs font-bold px-2 py-0.5 rounded-full border border-[#ffd700]/30 text-[#ffd700]">
+                  <span className="text-xs font-bold px-2 py-0.5 rounded-full border border-[#ffd700]/30 text-[#ffd700] flex-shrink-0">
                     {w.badge}
                   </span>
                 )}
@@ -129,8 +176,8 @@ export function WalletModal({ onClose, onSuccess }: WalletModalProps) {
           })}
         </div>
 
-        <p className="text-[#ff69b4]/40 text-xs text-center mt-5">
-          AFRICA NFT required · X1 Blockchain
+        <p className="text-[#ff69b4]/30 text-xs text-center mt-5">
+          AFRICA X1 NFT required to play · All transactions on X1 Blockchain
         </p>
       </div>
     </div>
