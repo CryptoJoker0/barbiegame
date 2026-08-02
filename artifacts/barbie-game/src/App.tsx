@@ -11,6 +11,7 @@ import LeaderboardPage from '@/pages/LeaderboardPage';
 import ProfilePage from '@/pages/ProfilePage';
 import AdminPage from '@/pages/AdminPage';
 import GameScreen from '@/components/GameScreen';
+import WottGamePage from '@/pages/WottGamePage';
 import NotFound from '@/pages/not-found';
 
 const queryClient = new QueryClient({
