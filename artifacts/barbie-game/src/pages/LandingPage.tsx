@@ -736,19 +736,6 @@ export default function LandingPage() {
       {showModal && <WalletModal onClose={() => setShowModal(false)} />}
 
       {/* ── FLOATING MINT NFT BUTTON ─────────────────────────────────────────── */}
-      <a
-        href="https://african-x-1-nft--africamarket.replit.app"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-5 py-3 rounded-2xl font-black text-sm tracking-widest uppercase text-white mint-float"
-        style={{
-          background: 'linear-gradient(135deg, #e53935 0%, #b71c1c 50%, #ffd700 100%)',
-          border: '1.5px solid rgba(255,215,0,0.5)',
-        }}
-      >
-        <Sparkles className="h-4 w-4 flex-shrink-0" />
-        Mint NFT
-      </a>
     </div>
   );
 }

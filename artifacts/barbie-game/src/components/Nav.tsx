@@ -54,6 +54,16 @@ export default function Nav() {
 
           {/* Wallet */}
           <div className="flex items-center gap-3">
+            {/* Mint NFT — always visible */}
+            <a
+              href="https://african-x-1-nft--africamarket.replit.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-full font-black text-xs tracking-widest uppercase text-white transition-opacity hover:opacity-90"
+              style={{ background: 'linear-gradient(135deg, #e53935 0%, #b71c1c 50%, #ffd700 100%)', border: '1.5px solid rgba(255,215,0,0.4)' }}
+            >
+              ✦ Mint NFT
+            </a>
             {isConnected ? (
               <div className="flex items-center gap-2">
                 {hasNft && (
