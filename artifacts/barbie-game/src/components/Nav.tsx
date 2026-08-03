@@ -30,7 +30,7 @@ export default function Nav() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <img src={barbieLogo} alt="BARBIEFUN-GAME" className="h-10 drop-shadow-[0_0_8px_rgba(255,20,147,0.6)]" />
-            <span className="hidden sm:block font-black text-lg bg-clip-text text-transparent bg-gradient-to-r from-[#e91e8c] to-[#c2185b] tracking-wider">
+            <span className="hidden sm:block font-black text-lg bg-clip-text text-transparent bg-gradient-to-r from-[#e53935] to-[#b71c1c] tracking-wider">
               BARBIEFUN-GAME
             </span>
           </Link>
@@ -43,8 +43,8 @@ export default function Nav() {
                 href={l.href}
                 className={`text-sm font-bold transition-colors ${
                   loc === l.href
-                    ? 'text-[#e91e8c]'
-                    : 'text-[#c2185b]/70 hover:text-[#e91e8c]'
+                    ? 'text-[#e53935]'
+                    : 'text-[#b71c1c]/70 hover:text-[#e53935]'
                 }`}
               >
                 {l.label}
@@ -64,7 +64,7 @@ export default function Nav() {
                 )}
                 <button
                   onClick={disconnect}
-                  className="px-3 py-1.5 rounded-full border border-[#ff1493]/40 bg-[#ff1493]/10 text-[#c2185b] text-xs font-mono font-bold hover:bg-[#ff1493]/20 transition-colors"
+                  className="px-3 py-1.5 rounded-full border border-[#e53935]/40 bg-[#e53935]/10 text-[#b71c1c] text-xs font-mono font-bold hover:bg-[#e53935]/20 transition-colors"
                 >
                   {truncate(walletAddress!)}
                 </button>
@@ -72,14 +72,14 @@ export default function Nav() {
             ) : (
               <button
                 onClick={() => setShowModal(true)}
-                className="px-4 py-2 rounded-full bg-gradient-to-r from-[#e91e8c] to-[#f06292] text-white text-sm font-black hover:opacity-90 transition-opacity shadow-[0_0_18px_rgba(233,30,140,0.45)]"
+                className="px-4 py-2 rounded-full bg-gradient-to-r from-[#e53935] to-[#ef5350] text-white text-sm font-black hover:opacity-90 transition-opacity shadow-[0_0_18px_rgba(229,57,53,0.45)]"
               >
                 Connect Wallet
               </button>
             )}
             {/* Mobile hamburger */}
             <button
-              className="md:hidden text-[#c2185b]/70 hover:text-[#e91e8c]"
+              className="md:hidden text-[#b71c1c]/70 hover:text-[#e53935]"
               onClick={() => setMobileOpen(v => !v)}
             >
               {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -96,7 +96,7 @@ export default function Nav() {
                 href={l.href}
                 onClick={() => setMobileOpen(false)}
                 className={`text-base font-bold py-2 transition-colors ${
-                  loc === l.href ? 'text-[#e91e8c]' : 'text-[#c2185b]/70'
+                  loc === l.href ? 'text-[#e53935]' : 'text-[#b71c1c]/70'
                 }`}
               >
                 {l.label}
