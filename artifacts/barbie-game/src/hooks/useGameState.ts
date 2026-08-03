@@ -23,7 +23,10 @@ function getRandomSymbol() {
   return SYMBOLS[0];
 }
 
-export function useGameState() {
+export function useGameState(walletAddress?: string | null) {
+  const walletRef = useRef(walletAddress);
+  walletRef.current = walletAddress ?? null;
+
   const [balance, setBalance] = useState(1000);
   const [cheese, setCheese] = useState(0);
   const [jackpot, setJackpot] = useState(7777);
@@ -127,7 +130,23 @@ export function useGameState() {
       setStreak(newStreak);
       setLastWin(winAmount);
       setIsSpinning(false);
-      
+
+      // Persist spin to API — fire-and-forget, never blocks UX
+      if (walletRef.current) {
+        fetch('/api/game/spin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            playerAddress: walletRef.current,
+            symbols: result,
+            winAmount,
+            cheeseEarned: newCheese,
+            isJackpot: winAmount >= 7777,
+            clientSeed: Math.random().toString(36).slice(2),
+          }),
+        }).catch(() => {}); // silent — never interrupt the game
+      }
+
     }, 600);
     
   }, [balance, jackpot, streak, isSpinning, soundEnabled]);

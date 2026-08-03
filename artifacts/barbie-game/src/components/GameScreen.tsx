@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { useGameState, SYMBOLS } from '@/hooks/useGameState';
+import { useWallet } from '@/context/WalletContext';
 import { Volume2, VolumeX, Pause, Play, Coins } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
