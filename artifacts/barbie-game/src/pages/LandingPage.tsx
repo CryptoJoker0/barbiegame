@@ -117,6 +117,142 @@ const TILE_GLOWS = [
   'shadow-[0_0_18px_rgba(255,215,0,0.5)]  border-[#ffd700]/50',
 ];
 
+// ── Feature card icon SVGs ────────────────────────────────────────────────────
+const SlotIcon = () => (
+  <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
+    <rect width="48" height="48" rx="10" fill="#1a0a1a"/>
+    <rect x="8" y="12" width="32" height="20" rx="4" fill="#2d1b4e" stroke="#ff1493" strokeWidth="1.5"/>
+    <rect x="12" y="16" width="8" height="12" rx="2" fill="#0d0015" stroke="#ff1493" strokeWidth="1"/>
+    <rect x="22" y="16" width="8" height="12" rx="2" fill="#0d0015" stroke="#ffd700" strokeWidth="1"/>
+    <text x="16" y="25" textAnchor="middle" fill="#ff4444" fontSize="9" fontWeight="900" fontFamily="monospace">7</text>
+    <text x="26" y="25" textAnchor="middle" fill="#ffd700" fontSize="9" fontWeight="900" fontFamily="monospace">7</text>
+    <rect x="32" y="16" width="4" height="12" rx="2" fill="#0d0015" stroke="#ff1493" strokeWidth="1"/>
+    <text x="34" y="25" textAnchor="middle" fill="#ff4444" fontSize="9" fontWeight="900" fontFamily="monospace">7</text>
+    {/* Lever */}
+    <rect x="38" y="10" width="3" height="16" rx="1.5" fill="#ffd700"/>
+    <circle cx="39.5" cy="9" r="3" fill="#e53935"/>
+    <rect x="6" y="32" width="36" height="5" rx="2.5" fill="#ff1493" opacity="0.7"/>
+  </svg>
+);
+
+const FlameIcon = () => (
+  <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
+    <defs>
+      <linearGradient id="flameG" x1="0.5" y1="0" x2="0.5" y2="1">
+        <stop offset="0%" stopColor="#ffd700"/>
+        <stop offset="50%" stopColor="#ff6600"/>
+        <stop offset="100%" stopColor="#e53935"/>
+      </linearGradient>
+    </defs>
+    <rect width="48" height="48" rx="10" fill="#1a0a1a"/>
+    {/* Outer flame */}
+    <path d="M24 6 C24 6 30 14 28 20 C32 16 34 10 30 6 C34 14 36 20 32 28 C36 24 38 28 36 34 C34 40 28 44 24 44 C20 44 14 40 12 34 C10 28 12 24 16 28 C12 20 14 14 18 10 C16 16 18 20 22 20 C20 14 24 6 24 6Z"
+      fill="url(#flameG)" opacity="0.9"/>
+    {/* Inner core */}
+    <path d="M24 20 C24 20 27 25 26 29 C28 27 29 24 27 20 C29 25 28 30 25 34 C23 36 21 36 20 34 C18 30 20 26 22 28 C20 24 22 20 24 20Z"
+      fill="#ffd700" opacity="0.7"/>
+  </svg>
+);
+
+const TrophyIcon = () => (
+  <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
+    <defs>
+      <linearGradient id="trophyG" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#ffd700"/>
+        <stop offset="100%" stopColor="#ff8c00"/>
+      </linearGradient>
+    </defs>
+    <rect width="48" height="48" rx="10" fill="#1a0a1a"/>
+    {/* Cup body */}
+    <path d="M16 10 H32 L30 26 C30 30 27 33 24 33 C21 33 18 30 18 26 Z" fill="url(#trophyG)"/>
+    {/* Handles */}
+    <path d="M16 12 C12 12 10 16 12 20 C13 22 16 22 16 20" stroke="#ffd700" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
+    <path d="M32 12 C36 12 38 16 36 20 C35 22 32 22 32 20" stroke="#ffd700" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
+    {/* Stem */}
+    <rect x="22" y="33" width="4" height="6" fill="#ff8c00"/>
+    {/* Base */}
+    <rect x="16" y="39" width="16" height="3" rx="1.5" fill="url(#trophyG)"/>
+    {/* Star */}
+    <path d="M24 16 L25.2 19.5 L29 19.5 L26 21.7 L27.2 25.2 L24 23 L20.8 25.2 L22 21.7 L19 19.5 L22.8 19.5 Z"
+      fill="white" opacity="0.7"/>
+  </svg>
+);
+
+const GiftIcon = () => (
+  <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
+    <defs>
+      <linearGradient id="giftG" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#e53935"/>
+        <stop offset="100%" stopColor="#b71c1c"/>
+      </linearGradient>
+    </defs>
+    <rect width="48" height="48" rx="10" fill="#1a0a1a"/>
+    {/* Box body */}
+    <rect x="10" y="22" width="28" height="20" rx="2" fill="url(#giftG)"/>
+    {/* Lid */}
+    <rect x="8" y="17" width="32" height="7" rx="2" fill="#e53935"/>
+    {/* Vertical ribbon on box */}
+    <rect x="22" y="22" width="4" height="20" fill="#ffd700" opacity="0.8"/>
+    {/* Horizontal ribbon on lid */}
+    <rect x="8" y="20" width="32" height="4" fill="#ffd700" opacity="0.8"/>
+    {/* Left bow loop */}
+    <path d="M24 17 C20 12 12 12 14 17" stroke="#ffd700" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    {/* Right bow loop */}
+    <path d="M24 17 C28 12 36 12 34 17" stroke="#ffd700" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    {/* Bow center knot */}
+    <circle cx="24" cy="17" r="2.5" fill="#ffd700"/>
+  </svg>
+);
+
+const ShieldIcon = () => (
+  <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
+    <defs>
+      <linearGradient id="shieldG" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#ff1493"/>
+        <stop offset="100%" stopColor="#b71c1c"/>
+      </linearGradient>
+    </defs>
+    <rect width="48" height="48" rx="10" fill="#1a0a1a"/>
+    <path d="M24 6 L38 12 L38 26 C38 34 32 40 24 44 C16 40 10 34 10 26 L10 12 Z"
+      fill="url(#shieldG)" opacity="0.9"/>
+    <path d="M24 9 L35 14 L35 26 C35 33 30 38 24 42 C18 38 13 33 13 26 L13 14 Z"
+      fill="#1a0a1a" opacity="0.4"/>
+    {/* Lock icon */}
+    <rect x="19" y="26" width="10" height="8" rx="2" fill="white" opacity="0.9"/>
+    <path d="M20 26 L20 23 C20 20.2 28 20.2 28 23 L28 26" stroke="white" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
+    <circle cx="24" cy="30" r="1.5" fill="#e53935"/>
+  </svg>
+);
+
+// ── Paytable mini-tile (inline, compact) ──────────────────────────────────────
+const WildTile = () => (
+  <svg viewBox="0 0 32 32" fill="none" className="w-full h-full">
+    <rect width="32" height="32" rx="6" fill="#2d1b4e" opacity="0.6"/>
+    <text x="50%" y="56%" dominantBaseline="middle" textAnchor="middle"
+      fill="#ff69b4" fontSize="14" fontWeight="900" fontFamily="monospace">?</text>
+  </svg>
+);
+
+type TileComponent = () => JSX.Element;
+interface PayRow {
+  tiles: (TileComponent | null)[];
+  reward: string;
+  color: string;
+  glow?: string;
+}
+
+const PAYTABLE: PayRow[] = [
+  { tiles: [SevenTile, SevenTile, SevenTile],   reward: 'MEGA JACKPOT',   color: 'text-[#ffd700]', glow: '0_0_12px_rgba(229,57,53,0.6)' },
+  { tiles: [CheeseTile, CheeseTile, CheeseTile],reward: '777 coins',      color: 'text-white' },
+  { tiles: [CrownTile, CrownTile, CrownTile],   reward: '500 coins',      color: 'text-white' },
+  { tiles: [DiamondTile, DiamondTile, DiamondTile], reward: '200 coins',  color: 'text-white' },
+  { tiles: [BowTile, BowTile, BowTile],          reward: '100 coins',     color: 'text-white' },
+  { tiles: [SevenTile, SevenTile, null],          reward: '50 coins',     color: 'text-[#ff69b4]' },
+  { tiles: [CheeseTile, null, null],              reward: '+1 Cheese Pt', color: 'text-[#ff69b4]' },
+];
+
+const FEATURE_ICONS = [SlotIcon, CheeseTile, FlameIcon, TrophyIcon, GiftIcon, ShieldIcon];
+
 // ── Scroll-reveal hook ─────────────────────────────────────────────────────────
 function useReveal() {
   const ref = useRef<HTMLDivElement>(null);
@@ -324,21 +460,24 @@ export default function LandingPage() {
           </Reveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: '🎰', title: '777 Jackpot', desc: 'Match three 7 symbols to trigger the legendary Mega Jackpot and claim the entire pool.' },
-              { icon: '🧀', title: 'Cheese Points', desc: 'Collect Cheese Points on every spin. Redeem them for powerful bonus spins.' },
-              { icon: '🔥', title: 'Win Streaks', desc: 'Build consecutive wins to activate streak multipliers and amplify your rewards.' },
-              { icon: '🏆', title: 'Leaderboard', desc: 'Compete against top AFRICA NFT holders worldwide and prove your luck.' },
-              { icon: '🎁', title: 'Daily Rewards', desc: 'Log in every day to claim free coins and Cheese Points. Don\'t break the streak.' },
-              { icon: '🛡️', title: 'NFT Exclusive', desc: 'Only verified AFRICA NFT holders can enter the lucky kingdom. True Web3 exclusivity.' },
-            ].map((f, i) => (
-              <Reveal key={f.title} delay={i * 80}>
-                <div className="glass-card rounded-2xl p-6 hover:border-[#ff1493]/60 hover:shadow-[0_0_20px_rgba(255,20,147,0.2)] transition-all h-full">
-                  <div className="text-4xl mb-3">{f.icon}</div>
-                  <h3 className="font-black text-white text-lg mb-2">{f.title}</h3>
-                  <p className="text-[#ffb6c1] text-sm leading-relaxed">{f.desc}</p>
-                </div>
-              </Reveal>
-            ))}
+              { title: '777 Jackpot',    desc: 'Match three 7 symbols to trigger the legendary Mega Jackpot and claim the entire pool.' },
+              { title: 'Cheese Points',  desc: 'Collect Cheese Points on every spin. Redeem them for powerful bonus spins.' },
+              { title: 'Win Streaks',    desc: 'Build consecutive wins to activate streak multipliers and amplify your rewards.' },
+              { title: 'Leaderboard',    desc: 'Compete against top AFRICA NFT holders worldwide and prove your luck.' },
+              { title: 'Daily Rewards',  desc: "Log in every day to claim free coins and Cheese Points. Don't break the streak." },
+              { title: 'NFT Exclusive',  desc: 'Only verified AFRICA NFT holders can enter the lucky kingdom. True Web3 exclusivity.' },
+            ].map((f, i) => {
+              const Icon = FEATURE_ICONS[i];
+              return (
+                <Reveal key={f.title} delay={i * 80}>
+                  <div className="glass-card rounded-2xl p-6 hover:border-[#ff1493]/60 hover:shadow-[0_0_20px_rgba(255,20,147,0.2)] transition-all h-full">
+                    <div className="w-12 h-12 mb-4"><Icon /></div>
+                    <h3 className="font-black text-white text-lg mb-2">{f.title}</h3>
+                    <p className="text-[#ffb6c1] text-sm leading-relaxed">{f.desc}</p>
+                  </div>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -404,19 +543,26 @@ export default function LandingPage() {
             <Reveal delay={150}>
               <div className="glass-card rounded-2xl p-6">
                 <h3 className="font-black text-[#ffd700] text-center mb-4 uppercase tracking-widest text-sm">Paytable</h3>
-                <div className="space-y-3 text-sm font-mono">
-                  {[
-                    { combo: '7️⃣7️⃣7️⃣', reward: 'MEGA JACKPOT', color: 'text-[#ffd700]' },
-                    { combo: '🧀🧀🧀', reward: '777 coins', color: 'text-white' },
-                    { combo: '👑👑👑', reward: '500 coins', color: 'text-white' },
-                    { combo: '🍷🍷🍷', reward: '200 coins', color: 'text-white' },
-                    { combo: '🎀🎀🎀', reward: '100 coins', color: 'text-white' },
-                    { combo: 'Any 2x 7️⃣', reward: '50 coins', color: 'text-[#ff69b4]' },
-                    { combo: 'Any Cheese', reward: '+1 Cheese Point', color: 'text-[#ff69b4]' },
-                  ].map(r => (
-                    <div key={r.combo} className="flex justify-between items-center border-b border-white/5 pb-2">
-                      <span className="tracking-widest">{r.combo}</span>
-                      <span className={`font-bold ${r.color}`}>{r.reward}</span>
+                <div className="space-y-2">
+                  {PAYTABLE.map((row, ri) => (
+                    <div
+                      key={ri}
+                      className="flex items-center justify-between border-b border-white/5 pb-2"
+                      style={row.glow ? { filter: `drop-shadow(${row.glow})` } : undefined}
+                    >
+                      {/* Tile combo */}
+                      <div className="flex items-center gap-1">
+                        {row.tiles.map((Tile, ti) => (
+                          <div
+                            key={ti}
+                            className="w-8 h-8 rounded-lg border border-white/10 bg-black/40 overflow-hidden flex-shrink-0"
+                          >
+                            {Tile ? <Tile /> : <WildTile />}
+                          </div>
+                        ))}
+                      </div>
+                      {/* Reward */}
+                      <span className={`font-black text-xs ml-3 ${row.color}`}>{row.reward}</span>
                     </div>
                   ))}
                 </div>
@@ -590,9 +736,8 @@ export default function LandingPage() {
       {showModal && <WalletModal onClose={() => setShowModal(false)} />}
 
       {/* ── FLOATING MINT NFT BUTTON ─────────────────────────────────────────── */}
-      {/* TODO: replace href="#" with your actual mint page URL when ready */}
       <a
-        href="#"
+        href="https://african-x-1-nft--africamarket.replit.app"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-5 py-3 rounded-2xl font-black text-sm tracking-widest uppercase text-white mint-float"
