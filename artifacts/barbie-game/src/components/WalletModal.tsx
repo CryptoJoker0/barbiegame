@@ -67,25 +67,11 @@ const WALLETS: {
     installUrl: 'https://backpack.app',
   },
   {
-    id: 'wewallet',
-    name: 'WE Wallet',
-    desc: 'Browser extension · X1 native',
-    icon: <WEWalletIcon />,
-    installUrl: 'https://wewallet.io',
-  },
-  {
     id: 'x1web',
     name: 'X1 Web Wallet',
     desc: 'Official X1 Blockchain web wallet',
     icon: <X1Icon />,
     badge: 'Open ↗',
-  },
-  {
-    id: 'x1mobile',
-    name: 'X1 Mobile (iOS)',
-    desc: 'Install via TestFlight',
-    icon: <IOSIcon />,
-    badge: 'TestFlight ↗',
   },
 ];
 

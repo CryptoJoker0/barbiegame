@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 import { NFT_CONFIG, X1_CHAIN_PARAMS } from '@/config/nft.config';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-export type WalletId = 'phantom' | 'backpack' | 'wewallet' | 'x1web' | 'x1mobile';
+export type WalletId = 'phantom' | 'backpack' | 'wewallet' | 'x1web' | 'x1mobile'; // wewallet/x1mobile kept for type compat but not shown in UI
 
 interface WalletContextValue {
   walletAddress: string | null;
@@ -44,13 +44,16 @@ declare global {
 function getProvider(id: WalletId): any | null {
   switch (id) {
     case 'phantom':
+      // Only return Phantom's dedicated namespace, never a generic window.ethereum
       return window.phantom?.ethereum ?? (window.ethereum?.isPhantom ? window.ethereum : null);
     case 'backpack':
+      // Only return Backpack's dedicated namespace, never a generic window.ethereum
       return window.backpack?.ethereum ?? (window.ethereum?.isBackpack ? window.ethereum : null);
     case 'wewallet':
-      // WE Wallet injects under window.we.ethereum or window.weWallet, fallback to generic
-      return window.we?.ethereum ?? window.weWallet ?? (window.ethereum?.isWEWallet ? window.ethereum : window.ethereum ?? null);
+      // Only WE Wallet dedicated namespaces — no fallback to window.ethereum
+      return window.we?.ethereum ?? window.weWallet ?? (window.ethereum?.isWEWallet ? window.ethereum : null);
     case 'x1web':
+      // X1 Web Wallet opens in a new tab; window.ethereum not used for this path
       return window.ethereum ?? null;
     default:
       return null;

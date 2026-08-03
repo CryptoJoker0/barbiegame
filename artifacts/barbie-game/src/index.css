@@ -88,12 +88,11 @@
   }
 
   body {
-    /* Pearlescent light-pink background matching the brand image */
+    /* Deep dark background — white text is readable */
     background:
-      radial-gradient(ellipse 45% 35% at 88% 12%, rgba(255, 20, 147, 0.22) 0%, transparent 60%),
-      radial-gradient(ellipse 38% 28% at 12% 60%, rgba(233, 30, 140, 0.14) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 40% at 50% 50%, rgba(255, 182, 210, 0.25) 0%, transparent 70%),
-      linear-gradient(145deg, #fce8f3 0%, #f9d0e8 28%, #f4b4d6 56%, #f8c8e8 80%, #fce0f2 100%);
+      radial-gradient(ellipse 60% 40% at 80% 10%, rgba(255, 20, 147, 0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 35% at 10% 70%, rgba(233, 30, 140, 0.12) 0%, transparent 60%),
+      linear-gradient(145deg, #1a0a1a 0%, #12001a 40%, #0d0015 70%, #1a0a1a 100%);
     background-attachment: fixed;
     color: var(--foreground);
     min-height: 100vh;

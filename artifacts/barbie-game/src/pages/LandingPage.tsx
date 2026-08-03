@@ -57,7 +57,7 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 const FAQS = [
   { q: 'What is BARBIEFUN-GAME?', a: 'BARBIEFUN-GAME is an exclusive Web3 slot machine game built on X1 Blockchain. Spin the 777 reels, collect Cheese Points, and chase the legendary Mega Jackpot — available only to AFRICA NFT holders.' },
   { q: 'How do I get an AFRICA NFT?', a: 'Visit the AFRICA NFT official website or marketplace to acquire your NFT on X1 Blockchain. Once you hold one, you automatically gain access to BARBIEFUN-GAME.' },
-  { q: 'Which wallets are supported?', a: 'MetaMask, Phantom, Backpack, and X1 Mobile (iOS via TestFlight). Any EVM-compatible wallet that supports custom networks works with X1 Blockchain.' },
+  { q: 'Which wallets are supported?', a: 'Phantom, Backpack, and X1 Web Wallet. These are the official supported wallets for BARBIEFUN-GAME on X1 Blockchain.' },
   { q: 'What is the Mega Jackpot?', a: 'Match three 7️⃣ symbols on the reels to trigger the Mega Jackpot, the biggest prize in the game. The jackpot pool grows with every spin.' },
   { q: 'Are my winnings real money?', a: 'All coins and Cheese Points are in-game currency for fun and competition. They represent your skill and luck on the leaderboard, not monetary value.' },
   { q: 'How does the leaderboard work?', a: 'Your high score is tracked automatically. The leaderboard resets periodically. Compete to hold the top spot among all AFRICA NFT holders.' },

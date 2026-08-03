@@ -25,7 +25,7 @@ export default function Nav() {
   return (
     <>
       {/* Nav — soft white-pink glassmorphism on the light-pink background */}
-      <nav className="sticky top-0 z-50 w-full border-b border-[#ff1493]/20 bg-white/60 backdrop-blur-2xl shadow-[0_2px_20px_rgba(255,20,147,0.10)]">
+      <nav className="sticky top-0 z-50 w-full border-b border-[#e53935]/20 bg-black/60 backdrop-blur-2xl shadow-[0_2px_20px_rgba(229,57,53,0.15)]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
@@ -89,7 +89,7 @@ export default function Nav() {
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div className="md:hidden border-t border-[#ff1493]/15 bg-white/80 backdrop-blur-xl px-4 py-4 flex flex-col gap-3">
+          <div className="md:hidden border-t border-[#e53935]/15 bg-black/80 backdrop-blur-xl px-4 py-4 flex flex-col gap-3">
             {links.map(l => (
               <Link
                 key={l.href}
