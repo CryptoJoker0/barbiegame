@@ -5,7 +5,117 @@ import { WalletModal } from '@/components/WalletModal';
 import { useGetLeaderboard, useGetGameConfig } from '@workspace/api-client-react';
 import barbieLogo from '@/assets/barbie-logo.png';
 import barbieCover from '@/assets/barbie-cover.png';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, Sparkles } from 'lucide-react';
+
+// ── Custom slot-machine tile SVGs ─────────────────────────────────────────────
+const SevenTile = () => (
+  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <defs>
+      <linearGradient id="sevGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#e53935"/>
+        <stop offset="100%" stopColor="#b71c1c"/>
+      </linearGradient>
+    </defs>
+    <rect width="64" height="64" rx="12" fill="url(#sevGrad)" opacity="0.15"/>
+    <text x="50%" y="56%" dominantBaseline="middle" textAnchor="middle"
+      fill="#ff4444" fontSize="38" fontWeight="900" fontFamily="monospace"
+      style={{ filter: 'drop-shadow(0 0 8px rgba(255,68,68,0.9))' }}>7</text>
+  </svg>
+);
+
+const CheeseTile = () => (
+  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <rect width="64" height="64" rx="12" fill="#ffd700" opacity="0.1"/>
+    <polygon points="10,46 54,46 54,30 32,18 10,30" fill="#ffd700" opacity="0.85"/>
+    <polygon points="10,30 32,18 54,30" fill="#ffed4a" opacity="0.9"/>
+    <circle cx="26" cy="38" r="4" fill="#b8860b" opacity="0.6"/>
+    <circle cx="40" cy="36" r="3" fill="#b8860b" opacity="0.6"/>
+    <circle cx="33" cy="43" r="2.5" fill="#b8860b" opacity="0.6"/>
+  </svg>
+);
+
+const CrownTile = () => (
+  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <defs>
+      <linearGradient id="crownGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#ffd700"/>
+        <stop offset="100%" stopColor="#ff8c00"/>
+      </linearGradient>
+    </defs>
+    <rect width="64" height="64" rx="12" fill="url(#crownGrad)" opacity="0.1"/>
+    <path d="M10 46 L14 24 L24 36 L32 16 L40 36 L50 24 L54 46 Z"
+      fill="url(#crownGrad)" stroke="#ffd700" strokeWidth="1.5" strokeLinejoin="round"/>
+    <rect x="10" y="46" width="44" height="6" rx="2" fill="#ffd700" opacity="0.9"/>
+    <circle cx="32" cy="16" r="3" fill="#ff1493"/>
+    <circle cx="14" cy="24" r="2.5" fill="#ff1493"/>
+    <circle cx="50" cy="24" r="2.5" fill="#ff1493"/>
+  </svg>
+);
+
+const DiamondTile = () => (
+  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <defs>
+      <linearGradient id="diaGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#a8edff"/>
+        <stop offset="100%" stopColor="#0090ff"/>
+      </linearGradient>
+    </defs>
+    <rect width="64" height="64" rx="12" fill="url(#diaGrad)" opacity="0.1"/>
+    <path d="M32 10 L54 30 L32 54 L10 30 Z" fill="url(#diaGrad)" opacity="0.85"/>
+    <path d="M32 10 L54 30 L32 30 Z" fill="white" opacity="0.25"/>
+    <path d="M10 30 L32 30 L32 10 Z" fill="white" opacity="0.1"/>
+  </svg>
+);
+
+const BowTile = () => (
+  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <defs>
+      <linearGradient id="bowGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#ff1493"/>
+        <stop offset="100%" stopColor="#ff69b4"/>
+      </linearGradient>
+    </defs>
+    <rect width="64" height="64" rx="12" fill="url(#bowGrad)" opacity="0.12"/>
+    {/* Left wing */}
+    <path d="M32 32 C28 24 10 18 8 28 C6 38 24 38 32 32 Z" fill="url(#bowGrad)"/>
+    {/* Right wing */}
+    <path d="M32 32 C36 24 54 18 56 28 C58 38 40 38 32 32 Z" fill="url(#bowGrad)"/>
+    {/* Left bottom */}
+    <path d="M32 32 C28 40 10 46 8 36 C6 26 24 26 32 32 Z" fill="#ff1493" opacity="0.8"/>
+    {/* Right bottom */}
+    <path d="M32 32 C36 40 54 46 56 36 C58 26 40 26 32 32 Z" fill="#ff1493" opacity="0.8"/>
+    {/* Center knot */}
+    <circle cx="32" cy="32" r="5" fill="#ffd700" stroke="#ff69b4" strokeWidth="1.5"/>
+  </svg>
+);
+
+const StarTile = () => (
+  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <defs>
+      <linearGradient id="starGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#ffd700"/>
+        <stop offset="50%" stopColor="#ff8c00"/>
+        <stop offset="100%" stopColor="#ffd700"/>
+      </linearGradient>
+    </defs>
+    <rect width="64" height="64" rx="12" fill="url(#starGrad)" opacity="0.1"/>
+    <path d="M32 10 L36.9 24.5 L52 24.5 L40 33.5 L44.9 48 L32 39 L19.1 48 L24 33.5 L12 24.5 L27.1 24.5 Z"
+      fill="url(#starGrad)" stroke="#ffd700" strokeWidth="0.5"/>
+  </svg>
+);
+
+// Tile wrapper: frosted card with glow border
+const TILES = [SevenTile, CheeseTile, CrownTile, DiamondTile, BowTile, StarTile, SevenTile, CrownTile];
+const TILE_GLOWS = [
+  'shadow-[0_0_18px_rgba(229,57,53,0.6)]  border-[#e53935]/50',
+  'shadow-[0_0_18px_rgba(255,215,0,0.5)]  border-[#ffd700]/50',
+  'shadow-[0_0_18px_rgba(255,215,0,0.5)]  border-[#ffd700]/50',
+  'shadow-[0_0_18px_rgba(0,144,255,0.5)]  border-[#0090ff]/50',
+  'shadow-[0_0_18px_rgba(255,20,147,0.5)] border-[#ff1493]/50',
+  'shadow-[0_0_18px_rgba(255,215,0,0.5)]  border-[#ffd700]/50',
+  'shadow-[0_0_18px_rgba(229,57,53,0.6)]  border-[#e53935]/50',
+  'shadow-[0_0_18px_rgba(255,215,0,0.5)]  border-[#ffd700]/50',
+];
 
 // ── Scroll-reveal hook ─────────────────────────────────────────────────────────
 function useReveal() {
@@ -101,20 +211,21 @@ export default function LandingPage() {
       <section className="relative min-h-[92vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden">
         {/* Radial glow bg */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,rgba(255,20,147,0.22)_0%,transparent_70%)] pointer-events-none" />
-        {/* Drifting symbols */}
-        {['7️⃣', '🧀', '👑', '🍷', '🎀', '7️⃣', '🧀', '👑'].map((s, i) => (
-          <span
+        {/* Drifting slot tiles */}
+        {TILES.map((TileIcon, i) => (
+          <div
             key={i}
-            className="absolute select-none pointer-events-none opacity-[0.07] text-5xl animate-float"
+            className={`absolute select-none pointer-events-none w-14 h-14 rounded-xl border bg-black/30 backdrop-blur-sm tile-drift ${TILE_GLOWS[i]}`}
             style={{
-              left: `${8 + i * 12}%`,
-              top: `${10 + (i % 4) * 20}%`,
-              animationDelay: `${i * 0.6}s`,
-              animationDuration: `${4 + i * 0.5}s`,
+              left: `${5 + i * 12}%`,
+              top: `${8 + (i % 4) * 22}%`,
+              opacity: 0.55,
+              animationDelay: `${i * 0.75}s`,
+              animationDuration: `${5 + i * 0.6}s`,
             }}
           >
-            {s}
-          </span>
+            <TileIcon />
+          </div>
         ))}
 
         <div className="relative z-10 flex flex-col items-center gap-6 max-w-4xl">
@@ -242,7 +353,7 @@ export default function LandingPage() {
             {[
               'Own at least one AFRICA NFT',
               'Open BARBIEFUN-GAME in your browser',
-              'Connect your wallet (MetaMask, Phantom, or Backpack)',
+              'Connect your wallet (Phantom, Backpack, or X1 Web Wallet)',
               'NFT ownership is verified automatically on X1 Blockchain',
               'Access granted — enter the lucky kingdom!',
               'No NFT yet? Visit the marketplace to get your AFRICA NFT',
@@ -477,6 +588,22 @@ export default function LandingPage() {
       </footer>
 
       {showModal && <WalletModal onClose={() => setShowModal(false)} />}
+
+      {/* ── FLOATING MINT NFT BUTTON ─────────────────────────────────────────── */}
+      {/* TODO: replace href="#" with your actual mint page URL when ready */}
+      <a
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-5 py-3 rounded-2xl font-black text-sm tracking-widest uppercase text-white mint-float"
+        style={{
+          background: 'linear-gradient(135deg, #e53935 0%, #b71c1c 50%, #ffd700 100%)',
+          border: '1.5px solid rgba(255,215,0,0.5)',
+        }}
+      >
+        <Sparkles className="h-4 w-4 flex-shrink-0" />
+        Mint NFT
+      </a>
     </div>
   );
 }
