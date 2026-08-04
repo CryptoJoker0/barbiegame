@@ -58,6 +58,8 @@ function Reel({
 }
 
 export default function GameScreen() {
+  const { address } = useWallet();
+
   const {
     balance,
     cheese,
@@ -78,7 +80,7 @@ export default function GameScreen() {
     buyBonus,
     freeSpins,
     resetGame
-  } = useGameState();
+  } = useGameState(address);
 
   const isGameOver = balance <= 0 && !isAutoSpin && !isSpinning && freeSpins === 0;
 
