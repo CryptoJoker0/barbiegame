@@ -12,6 +12,7 @@ import ProfilePage from '@/pages/ProfilePage';
 import AdminPage from '@/pages/AdminPage';
 import GameScreen from '@/components/GameScreen';
 import WottGamePage from '@/pages/WottGamePage';
+import BarbieEnglishPage from '@/pages/BarbieEnglishPage';
 import NotFound from '@/pages/not-found';
 
 const queryClient = new QueryClient({
@@ -104,6 +105,7 @@ function AppRouter() {
         <Route path="/leaderboard" component={LeaderboardPage} />
         <Route path="/profile" component={ProfilePage} />
         <Route path="/admin" component={AdminPage} />
+        <Route path="/english-challenge" component={BarbieEnglishPage} />
         <Route component={NotFound} />
       </Switch>
     </div>

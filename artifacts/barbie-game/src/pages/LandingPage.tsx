@@ -233,7 +233,7 @@ const WildTile = () => (
   </svg>
 );
 
-type TileComponent = () => JSX.Element;
+type TileComponent = () => React.ReactElement;
 interface PayRow {
   tiles: (TileComponent | null)[];
   reward: string;

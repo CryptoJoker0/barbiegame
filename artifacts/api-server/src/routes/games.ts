@@ -70,6 +70,36 @@ const SEED_GAMES = [
     isActive: true,
   },
   {
+    id: "barbie-english",
+    name: "BARBIE AND FRIENDS",
+    shortDescription: "Test your English skills — Vocabulary, Grammar, Spelling & Reading!",
+    description:
+      "BARBIE AND FRIENDS English Challenge is a fun educational game for kids aged 6 and up. " +
+      "Choose from four game modes — Vocabulary, Grammar, Spelling, and Reading — " +
+      "across three difficulty levels. Answer questions, earn stars, and climb the leaderboard!",
+    imageUrl: "/barbie-game/assets/game-english.png",
+    entryFee: "0.0",
+    feeCurrency: "XEN",
+    rules: [
+      "No wallet or NFT required — free for everyone!",
+      "Choose a game mode: Vocabulary, Grammar, Spelling, or Reading.",
+      "Select your difficulty: Easy (Ages 6–8), Medium (Ages 9–11), or Hard (Ages 12+).",
+      "Answer 10 questions per round — choose the correct option before time runs out.",
+      "Earn 100+ points for each correct answer; bonus points for fast answers.",
+      "Lose a life for each wrong answer — run out of lives and the game ends.",
+      "Scores are saved to the local leaderboard.",
+    ].join("\n"),
+    rewards: [
+      "⭐ Stars — Earn points for every correct answer",
+      "⏱ Speed Bonus — Answer quickly for extra points",
+      "🏆 Leaderboard — Track your top scores locally",
+      "🎉 Confetti — Complete all 10 questions correctly for a celebration!",
+      "🧠 Learning — Build English skills while having fun",
+    ].join("\n"),
+    nftRequired: false,
+    isActive: true,
+  },
+  {
     id: "barbie-wott",
     name: "BARBIE_WOTT",
     shortDescription: "Roll, Strategize, Outsmart — Win Big on the Mystic Board!",

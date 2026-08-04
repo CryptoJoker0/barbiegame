@@ -58,7 +58,7 @@ function Reel({
 }
 
 export default function GameScreen() {
-  const { address } = useWallet();
+  const { walletAddress: address } = useWallet();
 
   const {
     balance,

@@ -6,7 +6,9 @@ import { WalletModal } from '@/components/WalletModal';
 import game777 from '@/assets/game-777.jpg';
 import gamePrediction from '@/assets/game-prediction.jpg';
 import gameWott from '@/assets/game-wott.jpg';
+import gameEnglish from '@/assets/game-english.png';
 import barbieLogo from '@/assets/barbie-logo.png';
+import barbieCover from '@/assets/barbie-cover.png';
 import { CheckCircle, AlertTriangle, Wallet, Coins, ShieldCheck, ExternalLink } from 'lucide-react';
 
 interface Game {
@@ -25,6 +27,13 @@ const GAME_IMAGES: Record<string, string> = {
   'slot-machine': game777,
   'barbie-prediction': gamePrediction,
   'barbie-wott': gameWott,
+  'barbie-english': gameEnglish,
+};
+
+/** Maps a game ID to the in-app route that runs the actual game UI. */
+const GAME_ROUTES: Record<string, string> = {
+  'slot-machine': '/game',
+  'barbie-english': '/english-challenge',
 };
 
 type Step = 'preview' | 'connect' | 'no-nft' | 'pay' | 'paying' | 'success';
@@ -54,6 +63,16 @@ export function hasValidPaymentSession(walletAddress: string | null, gameId: str
       Date.now() - data.timestamp < 24 * 60 * 60 * 1000
     );
   } catch { return false; }
+}
+
+// ── Helpers ────────────────────────────────────────────────────────────────────
+/** Returns true when a step indicator dot should appear active for the current step. */
+function isStepActive(dotKey: string, currentStep: string): boolean {
+  return (
+    dotKey === currentStep ||
+    (currentStep === 'no-nft' && dotKey === 'connect') ||
+    (currentStep === 'paying' && dotKey === 'pay')
+  );
 }
 
 // ── Step indicator ─────────────────────────────────────────────────────────────
@@ -111,11 +130,17 @@ export default function GamePreviewPage({ params }: { params: { id: string } }) 
   // Auto-navigate to game after success animation
   useEffect(() => {
     if (step !== 'success') return;
-    const t = setTimeout(() => navigate('/game'), 2200);
+    const destination = GAME_ROUTES[gameId] ?? '/game';
+    const t = setTimeout(() => navigate(destination), 2200);
     return () => clearTimeout(t);
-  }, [step, navigate]);
+  }, [step, navigate, gameId]);
 
   function handleContinue() {
+    // Free + no NFT required → skip all wallet/NFT/payment gates
+    if (game && !game.nftRequired && parseFloat(game.entryFee) === 0) {
+      setStep('success');
+      return;
+    }
     if (!isConnected) {
       setStep('connect');
       setShowWalletModal(true);
@@ -311,7 +336,7 @@ export default function GamePreviewPage({ params }: { params: { id: string } }) 
           {steps.map((s, i) => {
             const sIdx = stepOrder.indexOf(s.key);
             const done = currentIdx > sIdx;
-            const active = s.key === step || (step === 'no-nft' && s.key === 'connect') || (step === 'paying' && s.key === 'pay');
+            const active = isStepActive(s.key, step);
             return (
               <div key={s.key} className="flex items-center gap-2">
                 <StepDot label={s.label} active={active} done={done} />
@@ -344,7 +369,10 @@ export default function GamePreviewPage({ params }: { params: { id: string } }) 
               </div>
               <div className="rounded-2xl border border-[#ffd700]/15 bg-[#110520] p-4">
                 <div className="text-[#ffd700]/50 text-xs font-bold uppercase tracking-widest mb-1">Requirement</div>
-                <div className="text-[#ffd700] font-black text-sm">1 AFRICA X1 NFT</div>
+                {game.nftRequired
+                  ? <div className="text-[#ffd700] font-black text-sm">1 AFRICA X1 NFT</div>
+                  : <div className="text-green-400 font-black text-sm">No wallet required</div>
+                }
               </div>
             </div>
 

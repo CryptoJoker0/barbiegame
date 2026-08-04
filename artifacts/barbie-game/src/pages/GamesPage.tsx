@@ -3,6 +3,8 @@ import { Link } from 'wouter';
 import game777 from '@/assets/game-777.jpg';
 import gamePrediction from '@/assets/game-prediction.jpg';
 import gameWott from '@/assets/game-wott.jpg';
+import gameEnglish from '@/assets/game-english.png';
+import barbieCover from '@/assets/barbie-cover.png';
 
 interface Game {
   id: string;
@@ -20,6 +22,7 @@ const GAME_IMAGES: Record<string, string> = {
   'slot-machine': game777,
   'barbie-prediction': gamePrediction,
   'barbie-wott': gameWott,
+  'barbie-english': gameEnglish,
 };
 
 function GameCard({ game }: { game: Game }) {
