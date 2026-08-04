@@ -65,7 +65,7 @@ function StepDot({ active, done, label }: { active: boolean; done: boolean; labe
       }`}>
         {done ? '✓' : label[0]}
       </div>
-      <span className={`text-[10px] font-bold tracking-wide ${active ? 'text-[#ff69b4]' : done ? 'text-green-400' : 'text-[#ff69b4]/30'}`}>
+      <span className={`text-[10px] font-bold tracking-wide ${active ? 'text-[#B22222]' : done ? 'text-green-600' : 'text-[#9E2A2A]'}`}>
         {label}
       </span>
     </div>
@@ -294,14 +294,14 @@ export default function GamePreviewPage({ params }: { params: { id: string } }) 
 
   // ── PREVIEW + CONNECT + PAY (main layout) ─────────────────────────────────────
   return (
-    <div className="min-h-screen bg-transparent text-white">
+    <div className="min-h-screen bg-transparent text-[#7B1818]">
       {/* Background glow */}
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_20%,rgba(255,20,147,0.12)_0%,transparent_70%)] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 py-8 relative z-10">
         {/* Back link */}
         <Link href="/games">
-          <button className="flex items-center gap-2 text-[#ff69b4]/60 hover:text-[#ff69b4] text-sm font-semibold mb-8 transition-colors">
+          <button className="flex items-center gap-2 text-[#9E2A2A] hover:text-[#7B1818] text-sm font-semibold mb-8 transition-colors">
             ← All Games
           </button>
         </Link>
@@ -337,8 +337,8 @@ export default function GamePreviewPage({ params }: { params: { id: string } }) 
             {/* Quick info */}
             <div className="grid grid-cols-2 gap-3">
               <div className="rounded-2xl border border-[#ff1493]/15 bg-[#110520] p-4">
-                <div className="text-[#ff69b4]/50 text-xs font-bold uppercase tracking-widest mb-1">Entry Fee</div>
-                <div className="text-white font-black text-lg">
+                <div className="text-[#9E2A2A] text-xs font-bold uppercase tracking-widest mb-1">Entry Fee</div>
+                <div className="text-[#7B1818] font-black text-lg">
                   {isFree ? 'FREE' : `${game.entryFee} ${game.feeCurrency}`}
                 </div>
               </div>
@@ -371,18 +371,18 @@ export default function GamePreviewPage({ params }: { params: { id: string } }) 
               <h1 className="text-3xl md:text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#ff1493] to-[#ffd700] mb-2">
                 {game.name}
               </h1>
-              <p className="text-[#ffb6c1]/80 leading-relaxed">{game.description}</p>
+              <p className="text-[#5C1A1A] leading-relaxed">{game.description}</p>
             </div>
 
             {/* Rules */}
             <div className="rounded-2xl border border-[#ff1493]/15 bg-[#110520] p-5">
-              <h3 className="font-black text-white text-sm uppercase tracking-widest mb-3 flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[#ff1493]" /> Game Rules
+              <h3 className="font-black text-[#7B1818] text-sm uppercase tracking-widest mb-3 flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-[#C2185B]" /> Game Rules
               </h3>
               <ul className="space-y-2">
                 {game.rules.split('\n').filter(Boolean).map((rule, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-[#ffb6c1]/70">
-                    <span className="text-[#ff1493] mt-0.5 flex-shrink-0">›</span>
+                  <li key={i} className="flex items-start gap-2 text-sm text-[#5C1A1A]">
+                    <span className="text-[#B22222] mt-0.5 flex-shrink-0">›</span>
                     {rule}
                   </li>
                 ))}
@@ -391,12 +391,12 @@ export default function GamePreviewPage({ params }: { params: { id: string } }) 
 
             {/* Rewards */}
             <div className="rounded-2xl border border-[#ffd700]/15 bg-[#110520] p-5">
-              <h3 className="font-black text-white text-sm uppercase tracking-widest mb-3 flex items-center gap-2">
-                <Coins className="w-4 h-4 text-[#ffd700]" /> Rewards
+              <h3 className="font-black text-[#7B1818] text-sm uppercase tracking-widest mb-3 flex items-center gap-2">
+                <Coins className="w-4 h-4 text-[#8B6914]" /> Rewards
               </h3>
               <ul className="space-y-2">
                 {game.rewards.split('\n').filter(Boolean).map((reward, i) => (
-                  <li key={i} className="text-sm text-[#ffb6c1]/70">{reward}</li>
+                  <li key={i} className="text-sm text-[#5C1A1A]">{reward}</li>
                 ))}
               </ul>
             </div>
@@ -404,8 +404,8 @@ export default function GamePreviewPage({ params }: { params: { id: string } }) 
             {/* ── ACTION PANEL ── */}
             {step === 'preview' && (
               <div className="rounded-2xl border border-[#ff1493]/25 bg-[#110520] p-5 flex flex-col gap-4">
-                <h3 className="font-black text-white text-sm uppercase tracking-widest">How to Enter</h3>
-                <div className="flex flex-col gap-2 text-sm text-[#ffb6c1]/70">
+                <h3 className="font-black text-[#7B1818] text-sm uppercase tracking-widest">How to Enter</h3>
+                <div className="flex flex-col gap-2 text-sm text-[#5C1A1A]">
                   <div className="flex items-center gap-3">
                     <div className="w-6 h-6 rounded-full bg-[#ff1493]/20 border border-[#ff1493]/40 flex items-center justify-center text-[#ff69b4] text-xs font-black flex-shrink-0">1</div>
                     Connect your wallet
@@ -451,8 +451,8 @@ export default function GamePreviewPage({ params }: { params: { id: string } }) 
 
             {step === 'pay' && (
               <div className="rounded-2xl border border-[#ff1493]/25 bg-[#110520] p-5 flex flex-col gap-4">
-                <h3 className="font-black text-white text-sm uppercase tracking-widest flex items-center gap-2">
-                  <Coins className="w-4 h-4 text-[#ffd700]" /> Pay Entry Fee
+                <h3 className="font-black text-[#7B1818] text-sm uppercase tracking-widest flex items-center gap-2">
+                  <Coins className="w-4 h-4 text-[#8B6914]" /> Pay Entry Fee
                 </h3>
 
                 {!treasuryWallet && (
@@ -464,7 +464,7 @@ export default function GamePreviewPage({ params }: { params: { id: string } }) 
                 <div className="rounded-xl bg-[#0d0013] border border-[#ff1493]/15 p-4 flex flex-col gap-2 text-sm">
                   <div className="flex justify-between text-[#ffb6c1]/60">
                     <span>Entry Fee</span>
-                    <span className="font-black text-white">{game.entryFee} {game.feeCurrency}</span>
+                    <span className="font-black text-[#7B1818]">{game.entryFee} {game.feeCurrency}</span>
                   </div>
                   <div className="flex justify-between text-[#ffb6c1]/60">
                     <span>Recipient</span>

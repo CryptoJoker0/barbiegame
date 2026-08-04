@@ -242,13 +242,13 @@ interface PayRow {
 }
 
 const PAYTABLE: PayRow[] = [
-  { tiles: [SevenTile, SevenTile, SevenTile],   reward: 'MEGA JACKPOT',   color: 'text-[#ffd700]', glow: '0_0_12px_rgba(229,57,53,0.6)' },
-  { tiles: [CheeseTile, CheeseTile, CheeseTile],reward: '777 coins',      color: 'text-white' },
-  { tiles: [CrownTile, CrownTile, CrownTile],   reward: '500 coins',      color: 'text-white' },
-  { tiles: [DiamondTile, DiamondTile, DiamondTile], reward: '200 coins',  color: 'text-white' },
-  { tiles: [BowTile, BowTile, BowTile],          reward: '100 coins',     color: 'text-white' },
-  { tiles: [SevenTile, SevenTile, null],          reward: '50 coins',     color: 'text-[#ff69b4]' },
-  { tiles: [CheeseTile, null, null],              reward: '+1 Cheese Pt', color: 'text-[#ff69b4]' },
+  { tiles: [SevenTile, SevenTile, SevenTile],   reward: 'MEGA JACKPOT',   color: 'text-[#8B6914]', glow: '0_0_12px_rgba(194,24,91,0.35)' },
+  { tiles: [CheeseTile, CheeseTile, CheeseTile],reward: '777 coins',      color: 'text-[#7B1818]' },
+  { tiles: [CrownTile, CrownTile, CrownTile],   reward: '500 coins',      color: 'text-[#7B1818]' },
+  { tiles: [DiamondTile, DiamondTile, DiamondTile], reward: '200 coins',  color: 'text-[#7B1818]' },
+  { tiles: [BowTile, BowTile, BowTile],          reward: '100 coins',     color: 'text-[#7B1818]' },
+  { tiles: [SevenTile, SevenTile, null],          reward: '50 coins',     color: 'text-[#B22222]' },
+  { tiles: [CheeseTile, null, null],              reward: '+1 Cheese Pt', color: 'text-[#B22222]' },
 ];
 
 const FEATURE_ICONS = [SlotIcon, CheeseTile, FlameIcon, TrophyIcon, GiftIcon, ShieldIcon];
@@ -317,11 +317,11 @@ function FaqItem({ q, a }: { q: string; a: string }) {
         onClick={() => setOpen(v => !v)}
         className="w-full flex items-center justify-between p-4 text-left hover:bg-[#ff1493]/5 transition-colors"
       >
-        <span className="font-bold text-white text-sm md:text-base">{q}</span>
+        <span className="font-bold text-[#7B1818] text-sm md:text-base">{q}</span>
         {open ? <ChevronUp className="h-4 w-4 text-[#ff69b4] flex-shrink-0" /> : <ChevronDown className="h-4 w-4 text-[#ff69b4] flex-shrink-0" />}
       </button>
       {open && (
-        <div className="px-4 pb-4 text-[#ffb6c1] text-sm leading-relaxed border-t border-[#ff1493]/10">
+        <div className="px-4 pb-4 text-[#5C1A1A] text-sm leading-relaxed border-t border-[#ff1493]/10">
           <p className="pt-3">{a}</p>
         </div>
       )}
@@ -342,7 +342,7 @@ export default function LandingPage() {
   const jackpot = gameConfig?.jackpotAmount ?? 1000;
 
   return (
-    <div className="min-h-screen bg-transparent text-white">
+    <div className="min-h-screen bg-transparent text-[#7B1818]">
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
       <section className="relative min-h-[92vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden">
         {/* Radial glow bg */}
@@ -374,7 +374,7 @@ export default function LandingPage() {
             />
           </div>
 
-          <div className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#ff1493]/40 bg-[#ff1493]/10 text-xs text-[#ff69b4] font-mono font-bold tracking-widest">
+          <div className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#ff1493]/40 bg-[#ff1493]/10 text-xs text-[#B22222] font-mono font-bold tracking-widest">
             <span className="w-2 h-2 rounded-full bg-[#ff1493] animate-pulse inline-block" />
             LIVE ON X1 BLOCKCHAIN
           </div>
@@ -384,10 +384,10 @@ export default function LandingPage() {
             BARBIEFUN-GAME
           </h1>
 
-          <p className="text-lg md:text-2xl text-[#ffb6c1] font-bold max-w-2xl leading-relaxed">
+          <p className="text-lg md:text-2xl text-[#5C1A1A] font-bold max-w-2xl leading-relaxed">
             777 &amp; Cheese — The Ultimate NFT Casino Experience
           </p>
-          <p className="text-sm md:text-base text-[#ff69b4]/70 max-w-xl">
+          <p className="text-sm md:text-base text-[#9E2A2A] max-w-xl">
             Exclusively for AFRICA NFT holders. Spin the reels, collect Cheese, and chase the Mega Jackpot.
           </p>
 
@@ -412,7 +412,7 @@ export default function LandingPage() {
               </button>
             ) : (
               <Link href="/leaderboard">
-                <button className="px-8 py-4 rounded-2xl border-2 border-[#ff1493]/50 text-[#ff69b4] font-black text-lg hover:bg-[#ff1493]/10 transition-colors">
+                <button className="px-8 py-4 rounded-2xl border-2 border-[#ff1493]/50 text-[#B22222] font-black text-lg hover:bg-[#ff1493]/10 transition-colors">
                   View Leaderboard
                 </button>
               </Link>
@@ -430,19 +430,19 @@ export default function LandingPage() {
         <div className="max-w-3xl mx-auto">
           <Reveal>
             <div className="glass-card rounded-3xl p-8 md:p-12 text-center">
-              <h2 className="text-3xl md:text-4xl font-black text-white mb-6">
-                Welcome to <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#ff1493] to-[#ffd700]">BARBIEFUN-GAME</span>
+              <h2 className="text-3xl md:text-4xl font-black text-[#7B1818] mb-6">
+                Welcome to <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#C2185B] to-[#8B6914]">BARBIEFUN-GAME</span>
               </h2>
-              <p className="text-[#ffb6c1] text-base md:text-lg leading-relaxed">
+              <p className="text-[#5C1A1A] text-base md:text-lg leading-relaxed">
                 Welcome to BARBIEFUN-GAME, an exclusive Web3 gaming experience where luck, fun, and rewards come together.
                 Inspired by the exciting 777 &amp; Cheese concept, players spin the reels, collect Cheese Points,
                 unlock bonus rewards, and chase the legendary 777 Jackpot.
               </p>
-              <p className="text-[#ffb6c1] text-base md:text-lg leading-relaxed mt-4">
+              <p className="text-[#5C1A1A] text-base md:text-lg leading-relaxed mt-4">
                 This game is exclusively available to AFRICA NFT holders. Simply connect your wallet,
                 verify your NFT ownership, and start playing.
               </p>
-              <p className="mt-6 text-xl font-black text-[#ffd700]" style={{ textShadow: '0 0 10px rgba(255,215,0,0.5)' }}>
+              <p className="mt-6 text-xl font-black text-[#8B6914]">
                 Own the NFT. Spin the 777. Collect the Cheese. Win Big.
               </p>
             </div>
@@ -470,10 +470,10 @@ export default function LandingPage() {
               const Icon = FEATURE_ICONS[i];
               return (
                 <Reveal key={f.title} delay={i * 80}>
-                  <div className="glass-card rounded-2xl p-6 hover:border-[#ff1493]/60 hover:shadow-[0_0_20px_rgba(255,20,147,0.2)] transition-all h-full">
+                  <div className="glass-card rounded-2xl p-6 hover:border-[#C2185B]/60 hover:shadow-[0_0_20px_rgba(194,24,91,0.15)] transition-all h-full">
                     <div className="w-12 h-12 mb-4"><Icon /></div>
-                    <h3 className="font-black text-white text-lg mb-2">{f.title}</h3>
-                    <p className="text-[#ffb6c1] text-sm leading-relaxed">{f.desc}</p>
+                    <h3 className="font-black text-[#7B1818] text-lg mb-2">{f.title}</h3>
+                    <p className="text-[#5C1A1A] text-sm leading-relaxed">{f.desc}</p>
                   </div>
                 </Reveal>
               );
@@ -506,7 +506,7 @@ export default function LandingPage() {
                     {i + 1}
                   </div>
                   <div className="flex-1 pt-2">
-                    <p className="text-white font-semibold">{step}</p>
+                    <p className="text-[#5C1A1A] font-semibold">{step}</p>
                   </div>
                 </div>
               </Reveal>
@@ -534,20 +534,20 @@ export default function LandingPage() {
                   'Claim daily rewards for free coins each day',
                 ].map((step, i) => (
                   <div key={i} className="flex items-start gap-3">
-                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#ff1493]/20 border border-[#ff1493]/40 flex items-center justify-center text-xs font-bold text-[#ff69b4]">{i + 1}</span>
-                    <p className="text-[#ffb6c1] text-sm pt-0.5">{step}</p>
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#C2185B] flex items-center justify-center text-xs font-black text-white">{i + 1}</span>
+                    <p className="text-[#5C1A1A] text-sm pt-0.5">{step}</p>
                   </div>
                 ))}
               </div>
             </Reveal>
             <Reveal delay={150}>
               <div className="glass-card rounded-2xl p-6">
-                <h3 className="font-black text-[#ffd700] text-center mb-4 uppercase tracking-widest text-sm">Paytable</h3>
+                <h3 className="font-black text-[#8B6914] text-center mb-4 uppercase tracking-widest text-sm">Paytable</h3>
                 <div className="space-y-2">
                   {PAYTABLE.map((row, ri) => (
                     <div
                       key={ri}
-                      className="flex items-center justify-between border-b border-white/5 pb-2"
+                      className="flex items-center justify-between border-b border-[#ff1493]/10 pb-2"
                       style={row.glow ? { filter: `drop-shadow(${row.glow})` } : undefined}
                     >
                       {/* Tile combo */}
@@ -555,7 +555,7 @@ export default function LandingPage() {
                         {row.tiles.map((Tile, ti) => (
                           <div
                             key={ti}
-                            className="w-8 h-8 rounded-lg border border-white/10 bg-black/40 overflow-hidden flex-shrink-0"
+                            className="w-8 h-8 rounded-lg border border-[#ff1493]/20 bg-[#ff1493]/5 overflow-hidden flex-shrink-0"
                           >
                             {Tile ? <Tile /> : <WildTile />}
                           </div>
@@ -583,10 +583,10 @@ export default function LandingPage() {
             ].map((s, i) => (
               <Reveal key={s.label} delay={i * 100}>
                 <div className="glass-card rounded-2xl p-4 md:p-6 text-center">
-                  <div className="text-3xl md:text-5xl font-black text-[#ffd700]" style={{ textShadow: '0 0 15px rgba(255,215,0,0.5)' }}>
+                  <div className="text-3xl md:text-5xl font-black text-[#8B6914]">
                     <AnimCounter target={s.value} suffix={s.suffix} />
                   </div>
-                  <div className="text-[#ffb6c1] text-xs md:text-sm mt-1 font-semibold uppercase tracking-widest">{s.label}</div>
+                  <div className="text-[#9E2A2A] text-xs md:text-sm mt-1 font-semibold uppercase tracking-widest">{s.label}</div>
                 </div>
               </Reveal>
             ))}
@@ -604,7 +604,7 @@ export default function LandingPage() {
             <div className="glass-card rounded-2xl overflow-hidden">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-[#ff1493]/20 text-[#ff69b4] text-xs uppercase tracking-widest">
+                  <tr className="border-b border-[#ff1493]/20 text-[#B22222] text-xs uppercase tracking-widest font-bold">
                     <th className="px-4 py-3 text-left">Rank</th>
                     <th className="px-4 py-3 text-left">Player</th>
                     <th className="px-4 py-3 text-right">High Score</th>
@@ -613,28 +613,28 @@ export default function LandingPage() {
                 </thead>
                 <tbody>
                   {leaderboard && leaderboard.length > 0 ? leaderboard.map((p, i) => (
-                    <tr key={p.walletAddress} className="border-b border-white/5 hover:bg-[#ff1493]/5 transition-colors">
+                    <tr key={p.walletAddress} className="border-b border-[#ff1493]/10 hover:bg-[#ff1493]/5 transition-colors">
                       <td className="px-4 py-3">
-                        <span className={`font-black ${i === 0 ? 'text-[#ffd700]' : i === 1 ? 'text-[#C0C0C0]' : i === 2 ? 'text-[#CD7F32]' : 'text-white/60'}`}>
+                        <span className={`font-black ${i === 0 ? 'text-[#8B6914]' : i === 1 ? 'text-[#666666]' : i === 2 ? 'text-[#8B5A00]' : 'text-[#9E2A2A]'}`}>
                           {i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `#${i + 1}`}
                         </span>
                       </td>
-                      <td className="px-4 py-3 font-mono text-white">
+                      <td className="px-4 py-3 font-mono text-[#5C1A1A] font-bold">
                         {p.nickname || truncate(p.walletAddress)}
                       </td>
-                      <td className="px-4 py-3 text-right font-bold text-[#ffd700]">{(p.highScore ?? 0).toLocaleString()}</td>
-                      <td className="px-4 py-3 text-right text-[#ffb6c1] hidden sm:table-cell">{(p.totalWinnings ?? 0).toLocaleString()}</td>
+                      <td className="px-4 py-3 text-right font-black text-[#8B6914]">{(p.highScore ?? 0).toLocaleString()}</td>
+                      <td className="px-4 py-3 text-right text-[#9E2A2A] font-semibold hidden sm:table-cell">{(p.totalWinnings ?? 0).toLocaleString()}</td>
                     </tr>
                   )) : (
                     <tr>
-                      <td colSpan={4} className="px-4 py-8 text-center text-[#ff69b4]/50">No players yet — be the first!</td>
+                      <td colSpan={4} className="px-4 py-8 text-center text-[#9E2A2A] font-semibold">No players yet — be the first!</td>
                     </tr>
                   )}
                 </tbody>
               </table>
               <div className="p-4 text-center border-t border-[#ff1493]/10">
                 <Link href="/leaderboard">
-                  <button className="text-[#ff69b4] text-sm font-bold hover:text-white transition-colors">
+                  <button className="text-[#B22222] text-sm font-bold hover:text-[#7B1818] transition-colors">
                     View Full Leaderboard →
                   </button>
                 </Link>

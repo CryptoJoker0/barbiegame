@@ -51,27 +51,27 @@
   --gold: #ffd700;
 
   --background: #fce8f3;
-  --foreground: #c62828;
+  --foreground: #7B1818;
   --border: #ff1493;
-  --input: #2d1b4e;
+  --input: #fff0f5;
   --ring: #ff1493;
   
-  --card: #2d1b4e;
-  --card-foreground: #ffffff;
+  --card: #ffffff;
+  --card-foreground: #7B1818;
   --card-border: #ff1493;
   
-  --popover: #2d1b4e;
-  --popover-foreground: #ffffff;
+  --popover: #fff5f8;
+  --popover-foreground: #7B1818;
   --popover-border: #ff1493;
 
-  --primary: #ff1493;
+  --primary: #C2185B;
   --primary-foreground: #ffffff;
   
-  --secondary: #ff69b4;
+  --secondary: #e91e8c;
   --secondary-foreground: #ffffff;
 
-  --muted: #4a2b6e;
-  --muted-foreground: #ffb6c1;
+  --muted: #fce8f3;
+  --muted-foreground: #9E2A2A;
 
   --accent: #ffd700;
   --accent-foreground: #1a0a1a;
@@ -198,9 +198,10 @@
 }
 
 .glass-card {
-  background: rgba(45, 27, 78, 0.6);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 20, 147, 0.3);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(194, 24, 91, 0.25);
+  box-shadow: 0 4px 24px rgba(194, 24, 91, 0.08);
 }
 
 .symbol-glow {

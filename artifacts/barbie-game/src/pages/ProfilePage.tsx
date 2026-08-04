@@ -190,7 +190,7 @@ export default function ProfilePage() {
 
   // ── Connected ─────────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-transparent text-white">
+    <div className="min-h-screen bg-transparent text-[#7B1818]">
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_60%_30%_at_50%_0%,rgba(255,20,147,0.1)_0%,transparent_70%)] pointer-events-none" />
       <div className="max-w-4xl mx-auto px-4 py-10 relative z-10 space-y-8">
 
@@ -276,16 +276,16 @@ export default function ProfilePage() {
 
         {/* ── NFT Status ─────────────────────────────────────────────────── */}
         <div>
-          <h2 className="text-lg font-black text-white mb-4 flex items-center gap-2">
-            <ShieldCheck className="w-5 h-5 text-[#ffd700]" /> My NFT
+          <h2 className="text-lg font-black text-[#7B1818] mb-4 flex items-center gap-2">
+            <ShieldCheck className="w-5 h-5 text-[#8B6914]" /> My NFT
           </h2>
           <NftCard address={addr} hasNft={hasNft} />
         </div>
 
         {/* ── Game Stats ─────────────────────────────────────────────────── */}
         <div>
-          <h2 className="text-lg font-black text-white mb-4 flex items-center gap-2">
-            <BarChart3 className="w-5 h-5 text-[#ff1493]" /> Game Stats
+          <h2 className="text-lg font-black text-[#7B1818] mb-4 flex items-center gap-2">
+            <BarChart3 className="w-5 h-5 text-[#C2185B]" /> Game Stats
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <StatCard
@@ -333,9 +333,9 @@ export default function ProfilePage() {
 
         {/* ── Achievements ───────────────────────────────────────────────── */}
         <div>
-          <h2 className="text-lg font-black text-white mb-4 flex items-center gap-2">
-            <Trophy className="w-5 h-5 text-[#ffd700]" /> Achievements
-            <span className="text-sm font-semibold text-[#ff69b4]/50">
+          <h2 className="text-lg font-black text-[#7B1818] mb-4 flex items-center gap-2">
+            <Trophy className="w-5 h-5 text-[#8B6914]" /> Achievements
+            <span className="text-sm font-semibold text-[#9E2A2A]">
               {unlockedKeys.size}/{ALL_ACHIEVEMENT_KEYS.length}
             </span>
           </h2>
@@ -353,10 +353,10 @@ export default function ProfilePage() {
                   }`}
                 >
                   <span className="text-3xl mb-2">{def.icon}</span>
-                  <span className="font-black text-white text-xs">{def.title}</span>
-                  <span className="text-[#ffb6c1]/60 text-xs mt-1 leading-tight">{def.desc}</span>
+                  <span className="font-black text-[#7B1818] text-xs">{def.title}</span>
+                  <span className="text-[#9E2A2A] text-xs mt-1 leading-tight">{def.desc}</span>
                   {unlocked && (
-                    <span className="mt-2 text-[10px] px-2 py-0.5 rounded-full bg-[#ffd700]/10 text-[#ffd700] font-bold border border-[#ffd700]/20">
+                    <span className="mt-2 text-[10px] px-2 py-0.5 rounded-full bg-[#8B6914]/10 text-[#8B6914] font-bold border border-[#8B6914]/20">
                       Unlocked
                     </span>
                   )}

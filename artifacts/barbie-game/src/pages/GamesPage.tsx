@@ -114,7 +114,7 @@ export default function GamesPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-transparent text-white">
+    <div className="min-h-screen bg-transparent text-[#7B1818]">
       {/* Header */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(255,20,147,0.18)_0%,transparent_70%)] pointer-events-none" />

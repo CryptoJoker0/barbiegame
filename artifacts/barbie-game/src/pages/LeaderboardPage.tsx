@@ -11,7 +11,7 @@ function RankBadge({ rank }: { rank: number }) {
   if (rank === 0) return <span className="text-xl">🥇</span>;
   if (rank === 1) return <span className="text-xl">🥈</span>;
   if (rank === 2) return <span className="text-xl">🥉</span>;
-  return <span className="text-[#ff69b4]/60 font-mono">#{rank + 1}</span>;
+  return <span className="text-[#9E2A2A] font-mono font-bold">#{rank + 1}</span>;
 }
 
 const TABS: { label: string; value: SortBy }[] = [
@@ -38,7 +38,7 @@ export default function LeaderboardPage() {
           <h1 className="text-4xl md:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#ff1493] to-[#ffd700] mb-2">
             Leaderboard
           </h1>
-          <p className="text-[#ff69b4]/70 text-sm">Top AFRICA NFT holders competing for glory</p>
+          <p className="text-[#9E2A2A] text-sm font-medium">Top AFRICA NFT holders competing for glory</p>
         </div>
 
         {/* Tabs */}
@@ -49,8 +49,8 @@ export default function LeaderboardPage() {
               onClick={() => setSortBy(t.value)}
               className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${
                 sortBy === t.value
-                  ? 'bg-gradient-to-r from-[#ff1493] to-[#ff69b4] text-white shadow-[0_0_10px_rgba(255,20,147,0.4)]'
-                  : 'text-[#ff69b4]/70 hover:text-white'
+                  ? 'bg-gradient-to-r from-[#C2185B] to-[#e91e8c] text-white shadow-[0_0_10px_rgba(194,24,91,0.4)]'
+                  : 'text-[#9E2A2A] hover:text-[#7B1818] hover:bg-[#ff1493]/10'
               }`}
             >
               {t.label}
@@ -62,7 +62,7 @@ export default function LeaderboardPage() {
         <div className="glass-card rounded-2xl overflow-hidden">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-[#ff1493]/20 text-[#ff69b4] text-xs uppercase tracking-widest">
+              <tr className="border-b border-[#ff1493]/20 text-[#B22222] text-xs uppercase tracking-widest font-bold">
                 <th className="px-4 md:px-6 py-4 text-left">Rank</th>
                 <th className="px-4 md:px-6 py-4 text-left">Player</th>
                 <th className="px-4 md:px-6 py-4 text-right">High Score</th>
@@ -75,7 +75,7 @@ export default function LeaderboardPage() {
               {isLoading ? (
                 // Skeleton rows
                 Array.from({ length: 10 }).map((_, i) => (
-                  <tr key={i} className="border-b border-white/5">
+                  <tr key={i} className="border-b border-[#ff1493]/10">
                     {Array.from({ length: 6 }).map((_, j) => (
                       <td key={j} className={`px-4 md:px-6 py-4 ${j >= 4 ? 'hidden md:table-cell' : j >= 3 ? 'hidden sm:table-cell' : ''}`}>
                         <div className="h-4 bg-[#ff1493]/10 rounded animate-pulse w-3/4" />
@@ -89,7 +89,7 @@ export default function LeaderboardPage() {
                   return (
                     <tr
                       key={p.walletAddress}
-                      className={`border-b border-white/5 transition-colors ${
+                      className={`border-b border-[#ff1493]/10 transition-colors ${
                         isMe ? 'bg-[#ff1493]/10 border-[#ff1493]/30' : 'hover:bg-[#ff1493]/5'
                       }`}
                     >
@@ -103,16 +103,16 @@ export default function LeaderboardPage() {
                         </div>
                         {p.nickname && <span className="text-[#ff69b4]/40 text-xs font-mono">{truncate(p.walletAddress)}</span>}
                       </td>
-                      <td className="px-4 md:px-6 py-4 text-right font-bold text-[#ffd700]">{(p.highScore ?? 0).toLocaleString()}</td>
-                      <td className="px-4 md:px-6 py-4 text-right text-[#ffb6c1] hidden sm:table-cell">{(p.totalWinnings ?? 0).toLocaleString()}</td>
-                      <td className="px-4 md:px-6 py-4 text-right text-[#ff69b4]/60 hidden md:table-cell">{(p.totalSpins ?? 0).toLocaleString()}</td>
-                      <td className="px-4 md:px-6 py-4 text-right text-[#ff69b4]/60 hidden md:table-cell">{(p.totalWins ?? 0).toLocaleString()}</td>
+                      <td className="px-4 md:px-6 py-4 text-right font-black text-[#8B6914]">{(p.highScore ?? 0).toLocaleString()}</td>
+                      <td className="px-4 md:px-6 py-4 text-right text-[#9E2A2A] font-semibold hidden sm:table-cell">{(p.totalWinnings ?? 0).toLocaleString()}</td>
+                      <td className="px-4 md:px-6 py-4 text-right text-[#9E2A2A] hidden md:table-cell">{(p.totalSpins ?? 0).toLocaleString()}</td>
+                      <td className="px-4 md:px-6 py-4 text-right text-[#9E2A2A] hidden md:table-cell">{(p.totalWins ?? 0).toLocaleString()}</td>
                     </tr>
                   );
                 })
               ) : (
                 <tr>
-                  <td colSpan={6} className="px-6 py-16 text-center text-[#ff69b4]/40">
+                  <td colSpan={6} className="px-6 py-16 text-center text-[#9E2A2A] font-semibold">
                     No players yet. Be the first to spin!
                   </td>
                 </tr>
@@ -124,7 +124,7 @@ export default function LeaderboardPage() {
             <div className="p-4 text-center border-t border-[#ff1493]/10">
               <button
                 onClick={() => setLimit(l => l + 20)}
-                className="text-[#ff69b4] text-sm font-bold hover:text-white transition-colors"
+                className="text-[#B22222] text-sm font-bold hover:text-[#7B1818] transition-colors"
               >
                 Load More
               </button>
