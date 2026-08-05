@@ -6,3 +6,4 @@ export * from "./game_config";
 export * from "./announcements";
 export * from "./games";
 export * from "./entry_payments";
+export * from "./africa_nft_ownership";

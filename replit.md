@@ -44,9 +44,28 @@ Other useful commands:
 | `VITE_ADMIN_WALLET_ADDRESS` | Wallet with admin dashboard access | optional |
 | `VITE_WALLETCONNECT_PROJECT_ID` | WalletConnect v2 Project ID | optional |
 
-## NFT Contract
+## NFT Verification
 
-Configure in `artifacts/barbie-game/src/config/nft.config.ts`. While `contractAddress` is the zero address, NFT verification is bypassed (demo mode — all wallets get access).
+Verification is **database-backed by default** — no smart contract required.
+
+| Table | Purpose |
+|---|---|
+| `africa_nft_ownership` | Stores wallet → NFT ownership records |
+
+Columns: `id` (PK = `{wallet}:{token_id}`), `wallet_address` (lower-cased), `token_id`, `collection` (default `AFRICA_NFT`), `nft_count`, `created_at`.
+
+**To grant a wallet access**, insert a row:
+```sql
+INSERT INTO africa_nft_ownership (id, wallet_address, token_id, collection)
+VALUES ('0xabc...:#1', '0xabc...', '#1', 'AFRICA_NFT');
+```
+
+**To switch to blockchain verification** once the contract is deployed:
+1. Set `NFT_VERIFIER_PROVIDER=blockchain` and `NFT_CONTRACT_ADDRESS=0x...` in env.
+2. Restart the API server — no code changes needed.
+
+The verification service lives at `artifacts/api-server/src/services/nft-verification/`.
+API endpoint: `GET /api/nft/verify/:address` → `{ hasNft, nftCount, verificationMethod }`
 
 ## Architecture decisions
 

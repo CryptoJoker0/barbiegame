@@ -1,34 +1,37 @@
 import { Router } from "express";
-import { ethers } from "ethers";
+import { nftVerifier } from "../services/nft-verification/index.js";
 
 const router = Router();
 
-// Reads VITE_NFT_CONTRACT_ADDRESS as fallback so both client and server
-// share one env var when only the VITE_ prefixed var is set.
-const NFT_CONTRACT =
-  process.env.NFT_CONTRACT_ADDRESS ??
-  process.env.VITE_NFT_CONTRACT_ADDRESS ??
-  "0x0000000000000000000000000000000000000000";
-const RPC_URL = process.env.NFT_RPC_URL ?? "https://x1rpc.infrafc.org";
-
-const NFT_ABI = ["function balanceOf(address owner) view returns (uint256)"];
-
-// GET /nft/verify/:address
+/**
+ * GET /nft/verify/:address
+ *
+ * Verifies whether a wallet owns at least one AFRICA NFT.
+ * The active verification provider is controlled by NFT_VERIFIER_PROVIDER:
+ *   "database"   (default) — looks up the africa_nft_ownership table
+ *   "blockchain"           — calls balanceOf on the deployed ERC-721 contract
+ */
 router.get("/nft/verify/:address", async (req, res) => {
   const { address } = req.params;
 
-  if (NFT_CONTRACT === "0x0000000000000000000000000000000000000000") {
-    res.status(503).json({ error: "NFT_CONTRACT_ADDRESS not configured on server" });
+  if (!address || typeof address !== "string") {
+    res.status(400).json({ error: "Invalid wallet address" });
     return;
   }
 
   try {
-    const provider = new ethers.providers.JsonRpcProvider(RPC_URL);
-    const contract = new ethers.Contract(NFT_CONTRACT, NFT_ABI, provider);
-    const balance: ethers.BigNumber = await contract.balanceOf(address);
-    res.json({ address, hasNft: balance.gt(0), balance: balance.toNumber() });
+    const result = await nftVerifier.verify(address);
+    res.json({
+      address: address.toLowerCase(),
+      hasNft: result.hasNft,
+      nftCount: result.nftCount,
+      verificationMethod: result.verificationMethod,
+    });
   } catch (err: any) {
-    res.status(502).json({ error: "NFT verification failed", details: err.message });
+    res.status(502).json({
+      error: "NFT verification failed",
+      details: err.message,
+    });
   }
 });
 

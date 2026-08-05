@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
-import { ethers } from 'ethers';
 import { NFT_CONFIG, X1_CHAIN_PARAMS } from '@/config/nft.config';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -111,20 +110,17 @@ async function switchToX1(provider: any): Promise<void> {
 }
 
 // ─── NFT check ────────────────────────────────────────────────────────────────
-async function checkNftOwnership(address: string, provider: any): Promise<boolean> {
-  // Zero-address contract means NFT check is not yet configured — treat as
-  // not-owned so the UI correctly shows the "you need an NFT" message.
-  if (NFT_CONFIG.contractAddress === '0x0000000000000000000000000000000000000000') {
-    return false;
-  }
-  const web3 = new ethers.providers.Web3Provider(provider);
-  const contract = new ethers.Contract(
-    NFT_CONFIG.contractAddress,
-    ['function balanceOf(address owner) view returns (uint256)'],
-    web3,
-  );
-  const balance = await contract.balanceOf(address);
-  return balance.gt(0);
+/**
+ * Verifies NFT ownership via the server-side API.
+ * The API uses the "database" provider by default (africa_nft_ownership table)
+ * and can be switched to "blockchain" by setting NFT_VERIFIER_PROVIDER=blockchain
+ * on the server — no frontend changes needed.
+ */
+async function checkNftOwnership(address: string, _provider: any): Promise<boolean> {
+  const res = await fetch(`/api/nft/verify/${encodeURIComponent(address.toLowerCase())}`);
+  if (!res.ok) return false;
+  const data = await res.json();
+  return Boolean(data.hasNft);
 }
 
 // ─── Provider ─────────────────────────────────────────────────────────────────

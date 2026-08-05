@@ -272,23 +272,20 @@ export default function GamePreviewPage({ params }: { params: { id: string } }) 
             <AlertTriangle className="w-10 h-10 text-red-400" />
           </div>
           <div>
-            <h2 className="text-2xl font-black text-white mb-3">AFRICA X1 NFT Required</h2>
+            <h2 className="text-2xl font-black text-white mb-3">NFT Required</h2>
             <p className="text-[#ff69b4]/70 text-sm leading-relaxed">
-              You must hold at least 1 AFRICA X1 NFT to play this game.
-              {walletAddress && (
-                <span className="block mt-2 font-mono text-xs text-[#ff69b4]/40">{truncate(walletAddress)}</span>
-              )}
+              You must own at least 1 AFRICA NFT to play.
             </p>
+            {walletAddress && (
+              <p className="font-mono text-xs text-[#ff69b4]/40 mt-2">{truncate(walletAddress)}</p>
+            )}
           </div>
           <div className="flex flex-col gap-3 w-full">
-            <a
-              href="https://x.com/BARBIEFUNV2"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-3 rounded-2xl bg-gradient-to-r from-[#ff1493] to-[#ff69b4] text-white font-black text-sm text-center hover:opacity-90 transition-opacity"
-            >
-              Mint AFRICA X1 NFT ↗
-            </a>
+            <Link href="/mint">
+              <button className="w-full py-3 rounded-2xl bg-gradient-to-r from-[#ff1493] to-[#ff69b4] text-white font-black text-sm text-center hover:opacity-90 transition-opacity">
+                🖼 Mint NFT
+              </button>
+            </Link>
             <button
               onClick={() => setStep('preview')}
               className="w-full py-3 rounded-2xl border border-[#ff1493]/30 text-[#ff69b4] font-bold text-sm hover:bg-[#ff1493]/10 transition-colors"
