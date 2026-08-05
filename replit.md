@@ -4,8 +4,15 @@ A Web3 casino slot machine gated by AFRICA NFT ownership on X1 Blockchain. Playe
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/barbie-game run dev` — run the React frontend (Vite, auto-port)
-- `pnpm --filter @workspace/api-server run dev` — run the Express API server (auto-port)
+Two workflows are configured in Replit and start automatically:
+
+| Workflow | Command | Port |
+|---|---|---|
+| **BARBIEGame Frontend** | `BASE_PATH=/ PORT=5173 pnpm --filter @workspace/barbie-game run dev` | 5173 |
+| **API Server** | `PORT=8080 pnpm --filter @workspace/api-server run dev` | 8080 |
+
+Other useful commands:
+
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
