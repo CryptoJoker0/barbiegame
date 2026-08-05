@@ -15,8 +15,15 @@ export const NFT_CONFIG = {
   /** X1 Blockchain Chain ID */
   chainId: 204005,
 
-  /** X1 Blockchain RPC URL */
-  rpcUrl: 'https://x1rpc.infrafc.org',
+  /** X1 Blockchain primary RPC URL (user-specified mainnet endpoint) */
+  rpcUrl: 'https://rpc.mainnet.x1.xyz',
+
+  /** Fallback RPC URLs tried in order if the primary is unavailable */
+  rpcFallbackUrls: [
+    'https://rpc.mainnet.x1.xyz',
+    'https://x1rpc.infrafc.org',
+    'https://rpc.x1blockchain.net',
+  ] as string[],
 
   /** Human-readable network name */
   networkName: 'X1 Blockchain',
@@ -33,9 +40,10 @@ export const X1_CHAIN_PARAMS = {
   chainId: `0x${NFT_CONFIG.chainId.toString(16)}`,
   chainName: NFT_CONFIG.networkName,
   nativeCurrency: { name: 'XEN', symbol: 'XEN', decimals: 18 },
-  rpcUrls: [NFT_CONFIG.rpcUrl],
+  // wallet_addEthereumChain accepts multiple RPC URLs; the wallet picks the first one it can reach
+  rpcUrls: NFT_CONFIG.rpcFallbackUrls as unknown as string[],
   blockExplorerUrls: ['https://explorer.x1blockchain.net'],
-} as const;
+};
 
 export const ADMIN_WALLET =
   import.meta.env.VITE_ADMIN_WALLET_ADDRESS?.toLowerCase() ?? '';
