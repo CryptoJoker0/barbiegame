@@ -9,6 +9,7 @@ import achievementsRouter from "./achievements";
 import announcementsRouter from "./announcements";
 import nftRouter from "./nft";
 import adminRouter from "./admin";
+import nftAdminRouter from "./nft-admin";
 
 const router: IRouter = Router();
 
@@ -22,5 +23,6 @@ router.use(achievementsRouter);
 router.use(announcementsRouter);
 router.use(nftRouter);
 router.use(adminRouter);
+router.use(nftAdminRouter);
 
 export default router;
