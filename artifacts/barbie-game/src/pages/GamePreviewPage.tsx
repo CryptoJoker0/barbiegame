@@ -105,6 +105,14 @@ export default function GamePreviewPage({ params }: { params: { id: string } }) 
   const [txHash, setTxHash] = useState<string | null>(null);
 
   const treasuryWallet = import.meta.env.VITE_TREASURY_WALLET_ADDRESS as string | undefined;
+  // Validate treasury is a proper EVM address (0x + 40 hex chars).
+  // Solana base58 addresses will fail this check and show a clear error.
+  const treasuryIsValidEVM = !!treasuryWallet && ethers.utils.isAddress(treasuryWallet);
+  const treasuryError = !treasuryWallet
+    ? 'Treasury wallet not configured. Set VITE_TREASURY_WALLET_ADDRESS.'
+    : !treasuryIsValidEVM
+    ? `Treasury wallet is not a valid EVM address (got "${treasuryWallet.slice(0, 12)}…"). X1 Blockchain uses 0x… addresses — please update VITE_TREASURY_WALLET_ADDRESS.`
+    : null;
 
   // Load game from API
   useEffect(() => {
@@ -154,7 +162,7 @@ export default function GamePreviewPage({ params }: { params: { id: string } }) 
   }
 
   async function handlePayEntryFee() {
-    if (!game || !walletAddress || !treasuryWallet) return;
+    if (!game || !walletAddress || !treasuryIsValidEVM) return;
     setPayError(null);
     setStep('paying');
 
@@ -480,9 +488,9 @@ export default function GamePreviewPage({ params }: { params: { id: string } }) 
                   <Coins className="w-4 h-4 text-[#8B6914]" /> Pay Entry Fee
                 </h3>
 
-                {!treasuryWallet && (
+                {treasuryError && (
                   <div className="p-3 rounded-xl bg-red-950/40 border border-red-500/30 text-red-300 text-xs text-center">
-                    Treasury wallet not configured. Set VITE_TREASURY_WALLET_ADDRESS.
+                    {treasuryError}
                   </div>
                 )}
 
@@ -509,7 +517,7 @@ export default function GamePreviewPage({ params }: { params: { id: string } }) 
 
                 <button
                   onClick={handlePayEntryFee}
-                  disabled={!treasuryWallet}
+                  disabled={!treasuryIsValidEVM}
                   className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#ff1493] to-[#ffd700] text-white font-black text-lg hover:opacity-90 hover:scale-[1.02] transition-all shadow-[0_0_25px_rgba(255,20,147,0.5)] disabled:opacity-40 disabled:cursor-not-allowed disabled:scale-100"
                 >
                   Pay {game.entryFee} {game.feeCurrency} → Enter Game
