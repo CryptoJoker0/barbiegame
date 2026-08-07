@@ -6,7 +6,7 @@ import { and, eq } from "drizzle-orm";
 
 const router = Router();
 
-const RPC_URL = process.env.NFT_RPC_URL ?? "https://x1rpc.infrafc.org";
+const RPC_URL = process.env.NFT_RPC_URL ?? "https://rpc.mainnet.x1.xyz";
 
 // ── POST /payments/entry ──────────────────────────────────────────────────────
 // Record and verify an on-chain entry fee payment.
