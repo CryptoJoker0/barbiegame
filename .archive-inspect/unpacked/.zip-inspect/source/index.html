@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0b0515">
+  <title>BarbieBeast: Battle Arena</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="app">
+    <section id="menu" class="screen active">
+      <div class="brand">BARBIEFUN</div>
+      <h1>BARBIEBEAST<small>BATTLE ARENA</small></h1>
+      <p class="tagline">FIGHT • EARN • OWN</p>
+      <div class="menu-buttons">
+        <button data-action="cpu">▶ VS COMPUTER</button>
+        <button data-action="pvp">▶ 2 PLAYER LOCAL</button>
+        <button data-action="how">▶ HOW TO PLAY</button>
+      </div>
+      <p class="version">DEMO V1 • BUILT FOR BARBIEFUN</p>
+    </section>
+
+    <section id="select" class="screen">
+      <div class="brand">BARBIEFUN</div>
+      <h2>CHOOSE YOUR BEAST</h2>
+      <p class="subheading">Select Player 1 fighter</p>
+      <div id="cards" class="cards"></div>
+      <div class="select-actions">
+        <button data-action="back">BACK</button>
+        <button data-action="start">ENTER ARENA</button>
+      </div>
+    </section>
+
+    <section id="arena" class="screen battle-screen">
+      <div class="hud">
+        <div class="fighter-hud">
+          <b id="p1name">PLAYER 1</b>
+          <div class="health-bar"><i id="p1hp"></i></div>
+          <small>ENERGY <span id="p1energy">0%</span></small>
+        </div>
+        <div class="round-hud">
+          <span>ROUND <strong id="round">1</strong></span>
+          <strong id="timer">60</strong>
+          <em id="status">READY</em>
+        </div>
+        <div class="fighter-hud right">
+          <b id="p2name">PLAYER 2</b>
+          <div class="health-bar"><i id="p2hp"></i></div>
+          <small>ENERGY <span id="p2energy">0%</span></small>
+        </div>
+      </div>
+
+      <canvas id="game" aria-label="BarbieBeast Battle Arena"></canvas>
+
+      <div class="mobile-controls">
+        <div class="control-group">
+          <button data-key="left">◀</button>
+          <button data-key="right">▶</button>
+          <button data-key="jump">JUMP</button>
+        </div>
+        <div class="control-group">
+          <button data-key="block">BLOCK</button>
+          <button data-key="light">ATTACK</button>
+          <button data-key="heavy">HEAVY</button>
+          <button data-key="special">SPECIAL</button>
+        </div>
+      </div>
+
+      <div id="result" class="result">
+        <div class="result-panel">
+          <p class="brand">BARBIEFUN</p>
+          <h2 id="winner"></h2>
+          <button data-action="restart">REMATCH</button>
+          <button data-action="menu">MENU</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
