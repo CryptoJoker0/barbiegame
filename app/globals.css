@@ -68,6 +68,12 @@ button { cursor:pointer; }
   @keyframes fighter-breathe { 50% { transform:translateY(-5px) scale(1.015); } }
   .beast.blocking .arm { box-shadow:0 0 22px var(--fighter,#ff3da9); }
   .battle-shell .hud { margin:0 4vw; padding:14px 18px; border:1px solid rgba(255,207,235,.36); border-radius:16px; background:linear-gradient(90deg,rgba(13,5,24,.92),rgba(45,8,49,.72),rgba(13,5,24,.92)); box-shadow:0 12px 40px rgba(0,0,0,.35),inset 0 0 24px rgba(255,61,169,.12); }
+  .player-id { display:flex; align-items:center; gap:7px; color:var(--pink); letter-spacing:.12em; }
+  .player-id i { color:var(--cyan); font-style:normal; font-size:8px; border:1px solid rgba(34,216,255,.4); padding:2px 4px; letter-spacing:.04em; }
+  .control-signature { display:block; margin-top:5px; color:#cbb5ce; font:8px 'Courier New',monospace; letter-spacing:.03em; white-space:nowrap; }
+  .touch-player-label { display:flex; flex-direction:column; gap:3px; min-width:78px; color:var(--pink); font:10px 'Courier New',monospace; letter-spacing:.08em; }
+  .touch-player-label small { color:var(--cyan); font-size:8px; }
+  .touch-actions kbd { color:var(--pink); font-weight:900; margin-right:3px; }
   .meter i,.energy-meter { border-color:rgba(255,255,255,.25); box-shadow:inset 0 0 9px rgba(0,0,0,.5); }
   .round-info strong { text-shadow:0 0 18px var(--pink),0 0 40px rgba(255,61,169,.7); }
   .touch-deck { display:none; }
