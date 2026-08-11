@@ -107,4 +107,31 @@ button { cursor:pointer; }
   .touch-move,.touch-actions { display:flex; gap:8px; }
   .touch-actions .touch-special { color:var(--cyan); border-color:rgba(34,216,255,.55); }
   @media (max-width:800px) { .touch-deck { position:relative; z-index:5; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:0 4vw 12px; } .hero { flex-direction:column;align-items:flex-start;justify-content:center;gap:18px;padding-top:50px; }.hero-art { position:absolute;right:-18%;bottom:12%;width:58vw;opacity:.65; }.hero-copy { z-index:1; }.hero h1 { font-size:clamp(42px,12vw,72px); }.menu-footer span:nth-child(2) { display:none; }.fighter-grid { grid-template-columns:repeat(2,1fr); padding-inline:3vw; }.fighter-card { min-height:160px; padding:10px; gap:7px; }.fighter-card .portrait { width:66px; }.fighter-info h2 { font-size:14px; }.select-bottom { flex-wrap:wrap; }.select-bottom .primary-btn { margin-left:auto; }.hud { grid-template-columns:1fr 76px 1fr; gap:8px;padding:10px 3vw; }.round-info strong { font-size:30px; }.hud-name b { font-size:10px; }.hud-name small,.meter-label,.energy-meter { font-size:8px; }.arena-stage { height:calc(100vh - 190px);min-height:430px; }.portrait-large { width:140px; }.arena-sign { top:8%; }.mobile-controls { position:absolute;z-index:8;display:flex;bottom:34px;left:0;right:0;justify-content:space-between;padding:0 16px;pointer-events:none; }.mobile-controls button { pointer-events:auto;border:1px solid rgba(255,255,255,.3);background:rgba(20,10,35,.75);color:#fff;width:44px;height:44px;border-radius:50%;font-weight:900; }.dpad,.action-pad { display:flex;gap:7px;align-items:center; }.action-pad button { border-radius:12px;color:var(--pink); }.action-pad .special-control { color:var(--cyan); }.battle-footer { display:none; }.battle-tools span { display:none; }.how-panel { margin:10vh 18px;padding:25px 18px; }.control-grid { grid-template-columns:1fr;gap:8px;margin:28px 0; }.select-head { padding:16px 3vw; }.select-head .brand-mark { font-size:11px; }.select-step { display:none; } }
-@media (max-width:500px) { .online-lobby { align-items:stretch; flex-direction:column; }.online-lobby label { width:100%; }.online-lobby input { flex:1; }.fighter-grid { gap:8px; }.fighter-card { display:block; }.fighter-card .portrait { width:75px;margin-bottom:5px; }.fighter-card .fighter-info p { display:none; }.fighter-card .stats { margin-top:6px; }.select-bottom { padding:13px 3vw; }.select-bottom .arena-choice { display:none; }.select-bottom .primary-btn { width:100%; }.hero-copy>p { letter-spacing:.18em; }.hero-art { right:-22%;bottom:7%; }.header-links { display:none; } }
+  @media (max-width:500px) { .online-lobby { align-items:stretch; flex-direction:column; }.online-lobby label { width:100%; }.online-lobby input { flex:1; }.fighter-grid { gap:8px; }.fighter-card { display:block; }.fighter-card .portrait { width:75px;margin-bottom:5px; }.fighter-card .fighter-info p { display:none; }.fighter-card .stats { margin-top:6px; }.select-bottom { padding:13px 3vw; }.select-bottom .arena-choice { display:none; }.select-bottom .primary-btn { width:100%; }.hero-copy>p { letter-spacing:.18em; }.hero-art { right:-22%;bottom:7%; }.header-links { display:none; } }
+
+/* Rare template pass: make the battle screen feel like a televised couture fight card. */
+.battle-shell { --arena-line:rgba(245,233,220,.32); }
+.battle-shell .battle-top { padding-block:18px; background:linear-gradient(90deg,rgba(9,7,17,.92),rgba(29,8,31,.66),rgba(9,7,17,.92)); }
+.battle-shell .battle-top:before { content:'LIVE / 001'; position:absolute; left:50%; top:7px; transform:translateX(-50%); color:var(--atelier-gold); font:8px 'Courier New',monospace; letter-spacing:.26em; }
+.battle-shell .battle-tools button { border-color:var(--atelier-gold); color:var(--atelier-gold); border-radius:0; }
+.battle-shell .hud { margin-top:14px; }
+.battle-shell .hud:before { content:'FIGHT CARD // CLASSIFIED RARE'; position:absolute; left:18px; top:-18px; color:rgba(245,233,220,.55); font:8px 'Courier New',monospace; letter-spacing:.15em; }
+.battle-shell .round-info { position:relative; padding:8px 12px 10px; border-inline:1px solid var(--arena-line); }
+.battle-shell .round-info:before,.battle-shell .round-info:after { content:''; position:absolute; width:5px; height:5px; border:1px solid var(--atelier-gold); transform:rotate(45deg); }
+.battle-shell .round-info:before { left:-3px; top:50%; }.battle-shell .round-info:after { right:-3px; top:50%; }
+.battle-shell .round-info strong { display:block; font-size:52px; line-height:.86; letter-spacing:-.08em; }
+.battle-shell .round-info small { display:block; margin-top:8px; color:var(--atelier-gold); font:8px 'Courier New',monospace; letter-spacing:.13em; }
+.battle-shell .arena-stage { margin-top:22px; border-color:rgba(245,233,220,.3); border-radius:3px; background:linear-gradient(180deg,rgba(28,8,38,.08),rgba(8,3,16,.8)); }
+.battle-shell .arena-stage:before { height:3px; background:linear-gradient(90deg,transparent,var(--atelier-gold),var(--atelier-pink),var(--atelier-gold),transparent); }
+.battle-shell .arena-stage:after { opacity:.55; }
+.battle-shell .battle-footer { letter-spacing:.16em; color:rgba(245,233,220,.58); }
+@media (max-width:800px) {
+  .battle-shell .battle-top { padding-block:14px; }
+  .battle-shell .battle-top:before { display:none; }
+  .battle-shell .hud { margin-top:10px; }
+  .battle-shell .hud:before { display:none; }
+  .battle-shell .round-info strong { font-size:34px; }
+  .battle-shell .round-info { padding-inline:5px; }
+  .battle-shell .arena-stage { margin-top:16px; border-radius:2px; }
+}
+
