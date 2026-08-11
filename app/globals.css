@@ -74,6 +74,28 @@ button { cursor:pointer; }
   .touch-player-label { display:flex; flex-direction:column; gap:3px; min-width:78px; color:var(--pink); font:10px 'Courier New',monospace; letter-spacing:.08em; }
   .touch-player-label small { color:var(--cyan); font-size:8px; }
   .touch-actions kbd { color:var(--pink); font-weight:900; margin-right:3px; }
+  /* Neon Atelier: editorial collectible interface language. */
+  :root { --atelier-ink:#090711; --atelier-paper:#f5e9dc; --atelier-pink:#ff3da9; --atelier-cyan:#22d8ff; --atelier-gold:#e9bd70; }
+  .game-shell { background-color:var(--atelier-ink); background-image:linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px); background-size:48px 48px; }
+  .game-shell:before { content:'BF—X1'; position:absolute; top:18px; right:22px; color:rgba(245,233,220,.38); font:9px 'Courier New',monospace; letter-spacing:.2em; writing-mode:vertical-rl; z-index:4; }
+  .brand-bar,.select-head,.battle-top { border-bottom:1px solid rgba(245,233,220,.25); position:relative; }
+  .brand-bar:after,.select-head:after,.battle-top:after { content:''; position:absolute; left:0; bottom:-3px; width:72px; height:5px; background:var(--atelier-pink); clip-path:polygon(0 0,100% 0,82% 100%,0 100%); }
+  .atelier-index { color:var(--atelier-gold); font:10px 'Courier New',monospace; letter-spacing:.14em; display:flex; flex-direction:column; gap:3px; }.atelier-index span { color:rgba(245,233,220,.5); font-size:8px; }
+  .header-links,.select-step,.battle-tools { font-family:'Courier New',monospace; letter-spacing:.12em; font-size:9px; }
+  .hero-copy h1,.select-title h1 { letter-spacing:-.06em; text-shadow:10px 10px 0 rgba(255,61,169,.1); }
+  .eyebrow { color:var(--atelier-gold); letter-spacing:.2em; font-family:'Courier New',monospace; }
+  .menu-actions button,.primary-btn,.secondary-btn { border-radius:2px; clip-path:polygon(0 0,96% 0,100% 18%,100% 100%,4% 100%,0 82%); }
+  .primary-btn { background:var(--atelier-pink); box-shadow:8px 8px 0 rgba(233,189,112,.18),0 0 30px rgba(255,61,169,.28); color:#160817; }
+  .select-shell { background-image:radial-gradient(circle at 50% 24%,rgba(255,61,169,.16),transparent 28%),linear-gradient(90deg,rgba(233,189,112,.05) 1px,transparent 1px),linear-gradient(rgba(233,189,112,.05) 1px,transparent 1px); background-size:auto,36px 36px,36px 36px; }
+  .select-title { position:relative; }.select-title:before { content:'COLLECT / CURATE / CONQUER'; position:absolute; right:5%; top:4px; color:var(--atelier-gold); font:9px 'Courier New',monospace; letter-spacing:.16em; }
+  .roster-meta { display:flex; justify-content:center; gap:22px; margin:12px auto 8px; color:rgba(245,233,220,.56); font:9px 'Courier New',monospace; letter-spacing:.12em; }.roster-meta b { color:var(--atelier-gold); }
+  .fighter-grid { counter-reset:roster; }.fighter-card { counter-increment:roster; border-radius:2px; border:1px solid rgba(245,233,220,.24); background:linear-gradient(145deg,rgba(245,233,220,.09),rgba(20,8,28,.9)); clip-path:polygon(0 0,94% 0,100% 7%,100% 100%,6% 100%,0 93%); }.fighter-card:before { content:'NO.' counter(roster,decimal-leading-zero); position:absolute; z-index:5; top:8px; left:10px; color:var(--atelier-gold); font:8px 'Courier New',monospace; letter-spacing:.1em; }.fighter-card:hover,.fighter-card.selected { border-color:var(--atelier-pink); box-shadow:10px 10px 0 rgba(255,61,169,.1),0 0 28px rgba(255,61,169,.25); transform:translateY(-4px); }.fighter-card.selected:after { content:'CURATED'; position:absolute; right:8px; top:8px; color:var(--atelier-cyan); font:8px 'Courier New',monospace; letter-spacing:.08em; }.selected-tag { border-radius:0; background:var(--atelier-pink); color:#160817; }.selected-tag span { color:var(--atelier-gold); }
+  .fighter-info h2 { font-family:Georgia,serif; font-style:italic; letter-spacing:-.04em; }.stats i { border-radius:0; }.stats i b { background:linear-gradient(90deg,var(--atelier-pink),var(--atelier-gold)) !important; }
+  .select-bottom { border-top:1px solid rgba(245,233,220,.3); border-radius:0; background:rgba(9,7,17,.85); }
+  .battle-top { background:rgba(9,7,17,.56); }.battle-brand { display:flex; flex-direction:column; align-items:center; font-family:Georgia,serif; font-style:italic; }.battle-brand small { color:var(--atelier-gold); font:8px 'Courier New',monospace; font-style:normal; letter-spacing:.18em; }.battle-brand > span { color:var(--atelier-pink); }
+  .battle-shell .hud { border-radius:2px; clip-path:polygon(0 0,99% 0,100% 15%,100% 100%,1% 100%,0 85%); background:rgba(9,7,17,.88); }.round-info strong { font-family:Georgia,serif; font-style:italic; }.round-dots i { border-radius:0; transform:rotate(45deg); }
+  .touch-deck { border:1px solid rgba(233,189,112,.34); border-radius:2px; background:rgba(9,7,17,.93); }.touch-deck button { border-radius:2px; clip-path:polygon(0 0,92% 0,100% 18%,100% 100%,8% 100%,0 82%); }.touch-actions .touch-special { color:var(--atelier-gold); border-color:var(--atelier-gold); }
+  @media (max-width:800px) { .roster-meta { gap:8px; font-size:8px; }.select-title:before { display:none; }.control-signature { white-space:normal; }.atelier-index { font-size:8px; } }
   .meter i,.energy-meter { border-color:rgba(255,255,255,.25); box-shadow:inset 0 0 9px rgba(0,0,0,.5); }
   .round-info strong { text-shadow:0 0 18px var(--pink),0 0 40px rgba(255,61,169,.7); }
   .touch-deck { display:none; }
