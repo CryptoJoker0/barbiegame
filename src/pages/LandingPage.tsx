@@ -337,8 +337,13 @@ export default function LandingPage() {
   const { data: leaderboard } = useGetLeaderboard({ limit: 5 });
   const { data: gameConfig } = useGetGameConfig();
 
-  const totalSpins = leaderboard?.reduce((s, p) => s + (p.totalSpins ?? 0), 0) ?? 0;
-  const activePlayers = leaderboard?.length ?? 0;
+  const leaderboardRows = Array.isArray(leaderboard)
+    ? leaderboard
+    : Array.isArray((leaderboard as { data?: unknown } | undefined)?.data)
+      ? ((leaderboard as { data: typeof leaderboard }).data ?? [])
+      : [];
+  const totalSpins = leaderboardRows.reduce((s, p) => s + (p.totalSpins ?? 0), 0);
+  const activePlayers = leaderboardRows.length;
   const jackpot = gameConfig?.jackpotAmount ?? 1000;
 
   return (
@@ -594,7 +599,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── LEADERBOARD PREVIEW ───────────────────────────────────────────────── */}
+      {/* ─��� LEADERBOARD PREVIEW ───────────────────────────────────────────────── */}
       <section className="py-20 px-4 bg-[#ff1493]/3">
         <div className="max-w-3xl mx-auto">
           <Reveal>
@@ -612,7 +617,7 @@ export default function LandingPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {leaderboard && leaderboard.length > 0 ? leaderboard.map((p, i) => (
+                  {leaderboardRows.length > 0 ? leaderboardRows.map((p, i) => (
                     <tr key={p.walletAddress} className="border-b border-[#ff1493]/10 hover:bg-[#ff1493]/5 transition-colors">
                       <td className="px-4 py-3">
                         <span className={`font-black ${i === 0 ? 'text-[#8B6914]' : i === 1 ? 'text-[#666666]' : i === 2 ? 'text-[#8B5A00]' : 'text-[#9E2A2A]'}`}>
