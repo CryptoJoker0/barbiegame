@@ -12,11 +12,10 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(import.meta.dirname, 'src'),
-      '@assets': path.resolve(
+      '@assets': path.resolve(import.meta.dirname, 'attached_assets'),
+      '@workspace/api-client-react': path.resolve(
         import.meta.dirname,
-        '..',
-        '..',
-        'attached_assets',
+        'lib/api-client-react/src',
       ),
       // Polyfill Node.js Buffer for ethers.js in the browser
       // Trailing slash forces Vite to use the npm package, not Node built-in
