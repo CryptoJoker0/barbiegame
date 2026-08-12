@@ -5,7 +5,7 @@ const baseUrl = process.env.BETTER_AUTH_URL || (process.env.VERCEL_PROJECT_PRODU
 const origins = [baseUrl, process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`, process.env.V0_RUNTIME_URL].filter(Boolean) as string[]
 
 export const auth = betterAuth({
-  secret: process.env.BETTER_AUTH_SECRET || 'barbiebeast-build-secret-change-in-runtime-32chars',
+  secret: process.env.BETTER_AUTH_SECRET || 'barbiefun-build-secret-change-in-runtime-32chars',
   database: new Pool({ connectionString: process.env.DATABASE_URL }),
   baseURL: baseUrl,
   trustedOrigins: origins,
