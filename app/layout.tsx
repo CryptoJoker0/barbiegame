@@ -3,8 +3,8 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'BarbieBeast: Battle Arena | BarbieFun',
-  description: 'Fight, earn, own. Enter the BarbieFun arcade and choose your beast.',
+  title: 'BarbieGame: Battle Arena | BarbieFun',
+  description: 'Fight, earn, own. Enter the BarbieFun arcade and choose your fighter.',
   generator: 'v0.app',
   icons: {
     icon: [
