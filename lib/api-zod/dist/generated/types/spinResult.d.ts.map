@@ -1,0 +1,1 @@
+{"version":3,"file":"spinResult.d.ts","sourceRoot":"","sources":["../../../src/generated/types/spinResult.ts"],"names":[],"mappings":"AAAA;;;;;;GAMG;AACH,OAAO,KAAK,EAAE,MAAM,EAAE,MAAM,UAAU,CAAC;AAEvC,MAAM,WAAW,UAAU;IACzB,QAAQ,EAAE,OAAO,CAAC;IAClB,MAAM,EAAE,MAAM,CAAC;IACf,UAAU,EAAE,MAAM,CAAC;IACnB,cAAc,EAAE,MAAM,CAAC;IACvB,WAAW,CAAC,EAAE,MAAM,CAAC;CACtB"}
